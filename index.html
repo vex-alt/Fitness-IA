@@ -16,6 +16,7 @@
             --text-color: #FFFFFF;
             --text-muted: #aaaaaa;
             --accent: #ff4500;
+            --success: #25d366;
         }
 
         * {
@@ -35,7 +36,6 @@
             min-height: 100vh;
         }
 
-        /* Container do Celular */
         .phone-container {
             width: 100%;
             max-width: 412px;
@@ -49,7 +49,6 @@
             flex-direction: column;
         }
 
-        /* Telas */
         .screen {
             display: none;
             width: 100%;
@@ -63,16 +62,13 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        .screen.active {
-            display: flex;
-        }
+        .screen.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.98); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Cabeçalho de navegação interna (Botão Voltar) */
         .screen-nav-header {
             display: flex;
             align-items: center;
@@ -92,14 +88,8 @@
             align-items: center;
             cursor: pointer;
             font-size: 16px;
-            transition: 0.2s;
         }
 
-        .btn-back:active {
-            transform: scale(0.9);
-        }
-
-        /* Utilitários Visuais */
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), #0086b3);
             color: #000;
@@ -107,21 +97,16 @@
             padding: 14px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 15px var(--primary-glow);
             text-align: center;
             text-decoration: none;
+            display: block;
+            width: 100%;
+            transition: transform 0.2s;
         }
-
         .btn-primary:active { transform: scale(0.98); }
-        .btn-primary:disabled {
-            background: #333;
-            color: #777;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
 
         .btn-secondary {
             background: transparent;
@@ -132,298 +117,99 @@
             font-weight: 600;
             cursor: pointer;
             text-align: center;
-            text-decoration: none;
         }
 
-        /* SPLASH SCREEN */
-        #screen-splash {
-            background-color: var(--bg-color);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        .filter-section {
+            background: var(--card-bg);
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #222;
         }
 
-        .logo-container i {
-            font-size: 70px;
+        .filter-title {
+            font-size: 11px;
             color: var(--primary);
-            text-shadow: 0 0 20px var(--primary-glow);
-            animation: pulse 2s infinite;
-        }
-
-        .logo-title {
-            font-size: 28px;
             font-weight: 700;
-            margin-top: 15px;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
-        .logo-title span { color: var(--primary); }
-
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #222;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            margin: 40px auto 20px;
-            animation: spin 1s linear infinite;
+        .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+        .chip {
+            background-color: #2c2c2e;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid #333;
+            color: var(--text-muted);
+            transition: all 0.2s;
         }
+        .chip.selected { background-color: var(--primary); color: #000; font-weight: 600; border-color: var(--primary); }
 
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        /* BOAS VINDAS */
         #screen-welcome {
-            background: linear-gradient(rgba(17,17,17,0.7), #111111), url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop') center/cover;
+            background: linear-gradient(rgba(17,17,17,0.8), #111111), url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop') center/cover;
             justify-content: flex-end;
             padding-bottom: 60px;
         }
 
-        /* CADASTRO INTELIGENTE */
-        .form-group { margin-bottom: 16px; }
+        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .header-avatar-clickable { width: 45px; height: 45px; border: 2px solid var(--primary); border-radius: 50%; overflow: hidden; cursor: pointer; background: #2c2c2e; display: flex; align-items: center; justify-content: center;}
+        .header-avatar-clickable i { font-size: 24px; color: var(--primary); }
 
-        label {
-            display: block;
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 8px;
-            color: white;
-            font-size: 15px;
-        }
-
-        input::placeholder { color: #555555; }
-        input:focus, select:focus { border-color: var(--primary); outline: none; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-        .chip-group {
+        .submenu-list {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 8px;
-            margin-top: 5px;
+            margin-top: 15px;
+            margin-bottom: 35px;
         }
-
-        .chip {
-            background-color: var(--card-bg);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            border: 1px solid #333;
-            transition: 0.2s;
-        }
-
-        .chip.selected {
-            background-color: var(--primary);
-            color: #000;
-            font-weight: 600;
-            border-color: var(--primary);
-        }
-
-        /* PROCESSAMENTO IA */
-        #screen-loading-ia { justify-content: center; align-items: center; text-align: center; }
-
-        /* HOME & CONTEÚDO */
-        .app-header {
+        .submenu-row-item {
+            background: var(--card-bg);
+            padding: 14px;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .header-avatar-clickable {
-            width: 45px;
-            height: 45px;
-            background-color: var(--card-bg);
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .header-avatar-clickable:active { transform: scale(0.9); }
-
-        .user-summary {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .summary-card {
-            background-color: var(--card-bg);
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .summary-card i { color: var(--primary); font-size: 20px; }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 80px;
-        }
-
-        .menu-item {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 16px;
-            text-align: center;
             cursor: pointer;
             border: 1px solid #222;
-            transition: 0.3s;
         }
+        .submenu-row-item div { display: flex; align-items: center; gap: 12px; }
+        .submenu-row-item i.icon-lead { color: var(--primary); font-size: 18px; width: 20px; text-align: center; }
 
-        .menu-item:active { transform: scale(0.95); }
-        .menu-item i { color: var(--primary); font-size: 28px; margin-bottom: 10px; display: block; }
+        .exercise-image-placeholder { width: 100%; height: 160px; background: linear-gradient(45deg, #1c1c1e, #2c2c2e); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; font-size: 44px; color: var(--primary); }
+        .timer-display { font-size: 42px; font-weight: 700; text-align: center; margin: 10px 0; font-family: monospace; color: var(--primary); }
 
-        /* Bottom Nav Bar */
-        .bottom-nav {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(28, 28, 30, 0.95);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            border-top: 1px solid #222;
-            z-index: 100;
-        }
-
-        .nav-item { color: var(--text-muted); text-align: center; font-size: 11px; cursor: pointer; flex: 1; }
-        .nav-item.active { color: var(--primary); }
-        .nav-item i { font-size: 20px; display: block; margin-bottom: 2px; }
-
-        /* TELA DE TREINO ATIVO */
-        .exercise-image-placeholder {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(45deg, #1c1c1e, #2c2c2e);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 50px;
-            color: var(--primary);
-        }
-
-        .timer-display { font-size: 42px; font-weight: 700; text-align: center; margin: 15px 0; font-family: monospace; color: var(--primary); }
-
-        /* AGENDA SEMANAL */
         .calendar-strip { display: flex; justify-content: space-between; margin-bottom: 20px; }
-        .calendar-day { background-color: var(--card-bg); padding: 10px 6px; border-radius: 8px; text-align: center; width: 13%; font-size: 12px; transition: 0.3s; }
-        .calendar-day.today { border: 2px solid var(--primary); background: rgba(0, 191, 255, 0.1); box-shadow: 0 0 10px var(--primary-glow); }
-        .calendar-day.completed { background-color: var(--primary); color: #000; font-weight: bold; border-color: var(--primary); }
+        .calendar-day { background-color: var(--card-bg); padding: 10px 6px; border-radius: 8px; text-align: center; width: 13%; font-size: 12px; }
+        .calendar-day.today { border: 2px solid var(--primary); background: rgba(0, 191, 255, 0.1); }
+        .calendar-day.completed { background-color: var(--success); color: #000; font-weight: bold; }
 
-        /* GAMIFICAÇÃO & EVOLUÇÃO */
-        .badge-card { background-color: var(--card-bg); padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; opacity: 0.3; transition: all 0.4s ease; }
-        .badge-card.unlocked { opacity: 1; border: 1px solid rgba(0, 191, 255, 0.4); background: linear-gradient(135deg, #1c1c1e, #252e36); box-shadow: 0 4px 10px rgba(0, 191, 255, 0.1); }
-        .badge-icon { font-size: 26px; }
-        .badge-status { margin-left: auto; font-size: 11px; font-weight: bold; color: var(--text-muted); padding: 4px 8px; border-radius: 10px; background: #2c2c2e; }
-        .badge-card.unlocked .badge-status { color: #000; background: var(--primary); }
+        .avatar-selection-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 15px 0; }
+        .avatar-option { background-color: var(--card-bg); border: 2px solid transparent; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; }
+        .avatar-option i { font-size: 50px; color: var(--text-muted); display: block; margin-bottom: 10px; }
+        .avatar-option.selected { border-color: var(--primary); background-color: rgba(0, 191, 255, 0.05); }
+        .avatar-option.selected i { color: var(--primary); }
 
-        .mock-chart {
-            height: 120px;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 15px;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            padding: 10px;
-        }
-
-        .chart-bar { width: 15%; background: linear-gradient(to top, var(--primary), #005f80); border-radius: 4px 4px 0 0; transition: 0.5s ease-out; }
-
-        /* SELEÇÃO DE AVATAR */
-        .avatar-selection-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 15px 0;
-        }
-        .avatar-option {
-            background-color: var(--card-bg);
-            border: 2px solid transparent;
-            border-radius: 50%;
-            height: 65px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 32px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .avatar-option.selected {
-            border-color: var(--primary);
-            background-color: rgba(0, 191, 255, 0.1);
-            transform: scale(1.05);
-        }
-
-        /* REDES SOCIAIS DO CRIADOR */
-        .social-buttons-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 25px 0;
-        }
-        .social-round-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--card-bg);
-            border: 1px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 26px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
+        .social-buttons-container { display: flex; justify-content: center; gap: 30px; margin: 25px 0; }
+        .social-round-btn { width: 60px; height: 60px; border-radius: 50%; background-color: var(--card-bg); border: 1px solid #333; display: flex; justify-content: center; align-items: center; font-size: 26px; text-decoration: none; }
         .social-round-btn.instagram { color: #e1306c; }
         .social-round-btn.whatsapp { color: #25d366; }
-        .social-round-btn:active { transform: scale(0.9); border-color: var(--primary); }
 
-        /* NOTIFICAÇÃO PUSH */
-        .notification-toast {
-            position: absolute;
-            top: -100px;
-            left: 16px;
-            right: 16px;
-            background-color: #1c1c1e;
-            border-left: 4px solid var(--primary);
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 1000;
-            transition: 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .notification-toast { position: absolute; top: -100px; left: 16px; right: 16px; background-color: #1c1c1e; border-left: 4px solid var(--primary); padding: 12px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; transition: 0.5s ease-in-out; display: flex; align-items: center; gap: 10px; }
         .notification-toast.show { top: 20px; }
-        .workout-list-item { background-color: var(--card-bg); padding: 14px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        .header-margin { margin-top: 15px; margin-bottom: 15px;}
-        .hidden-nav { display: none !important; }
+        
+        .workout-list-item { background-color: var(--card-bg); padding: 12px 14px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid #222; }
+        .workout-list-item.done { border-color: var(--success); background: linear-gradient(to right, #1c1c1e, rgba(37, 211, 102, 0.05)); }
+        .workout-list-item.done i.status-icon { color: var(--success) !important; }
+        
         .lock-notice { color: var(--accent); font-size: 12px; font-weight: 600; text-align: center; margin-top: 8px; display: none;}
+        .exercise-preview-badge { display: inline-block; background: #2c2c2e; padding: 2px 8px; border-radius: 6px; font-size: 11px; color: var(--text-muted); margin-right: 4px; margin-top: 5px; }
+        
+        .loading-inline-box { display: none; text-align: center; padding: 20px; }
+        .loading-inline-box i { animation: spin 1s linear infinite; color: var(--primary); font-size: 30px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -434,855 +220,563 @@
             <i class="fa-solid fa-bell" style="color: var(--primary);"></i>
             <div>
                 <b style="font-size: 13px; display:block;">Fitness AI Pro</b>
-                <span id="push-text" style="font-size: 12px; color: var(--text-muted);">Hora do treino! 🔥</span>
+                <span id="push-text" style="font-size: 12px; color: var(--text-muted);">Processando...</span>
             </div>
         </div>
 
         <div id="screen-splash" class="screen active">
-            <div class="logo-container">
-                <i class="fa-solid fa-dumbbell"></i>
+            <div style="text-align: center; margin-top: 250px;">
+                <i class="fa-solid fa-dumbbell" style="font-size: 70px; color: var(--primary);"></i>
+                <h1 style="font-size: 28px; font-weight: 700; margin-top: 15px;">FITNESS <span style="color: var(--primary)">AI PRO</span></h1>
+                <div style="width: 40px; height: 40px; border: 4px solid #222; border-top: 4px solid var(--primary); border-radius: 50%; margin: 40px auto; animation: spin 1s linear infinite;"></div>
             </div>
-            <h1 class="logo-title">FITNESS <span>AI PRO</span></h1>
-            <p style="color: var(--text-muted); font-size: 12px; margin-top: 5px;">Seu personal trainer inteligente no bolso.</p>
-            <div class="loader"></div>
-            <p style="color: var(--text-muted); font-size: 14px;">Preparando seu treino personalizado...</p>
         </div>
 
         <div id="screen-welcome" class="screen">
-            <h1 style="font-size: 32px; font-weight:700; line-height: 1.2;">Bem-vindo ao<br><span style="color:var(--primary)">Fitness AI Pro</span></h1>
-            <p style="color: #e0e0e0; margin-top: 10px; margin-bottom: 30px; font-size: 15px;">Monte seus treinos personalizados com Inteligência Artificial de forma rápida e eficiente.</p>
-            <button class="btn-primary" onclick="navigateTo('screen-register')">Começar</button>
-        </div>
-
-        <div id="screen-register" class="screen">
-            <div class="screen-nav-header">
-                <div class="btn-back" onclick="navigateTo('screen-welcome')"><i class="fa-solid fa-arrow-left"></i></div>
-                <h2 style="font-size: 20px;">Cadastro Inteligente</h2>
+            <div style="margin-top: auto; margin-bottom: 60px;">
+                <h1 style="font-size: 32px; font-weight:700; line-height: 1.2;">Rotina de<br><span style="color:var(--primary)">Alta Performance</span></h1>
+                <p style="color: #e0e0e0; margin-top: 10px; margin-bottom: 30px; font-size: 15px;">Monte rotinas de treino robustas e dinâmicas com no mínimo 4 exercícios por grupamento.</p>
+                <button class="btn-primary" onclick="navigateTo('screen-home')">Entrar no App</button>
             </div>
-            
-            <div class="form-group">
-                <label>Nome *</label>
-                <input type="text" id="reg-name" placeholder="Ex: João">
-            </div>
-
-            <div class="grid-2">
-                <div class="form-group">
-                    <label>Idade *</label>
-                    <input type="number" id="reg-age" placeholder="Ex: 18">
-                </div>
-                <div class="form-group">
-                    <label>Sexo</label>
-                    <select id="reg-gender">
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid-2">
-                <div class="form-group">
-                    <label>Altura (cm) *</label>
-                    <input type="number" id="reg-height" placeholder="Ex: 175">
-                </div>
-                <div class="form-group">
-                    <label>Peso (kg) *</label>
-                    <input type="number" id="reg-weight" placeholder="Ex: 70">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Objetivo</label>
-                <div class="chip-group" id="group-goal">
-                    <div class="chip selected" onclick="selectChip(this, 'group-goal')">Ganhar Massa Muscular</div>
-                    <div class="chip" onclick="selectChip(this, 'group-goal')">Emagrecer</div>
-                    <div class="chip" onclick="selectChip(this, 'group-goal')">Definição</div>
-                    <div class="chip" onclick="selectChip(this, 'group-goal')">Condicionamento Físico</div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Nível</label>
-                <div class="chip-group" id="group-level">
-                    <div class="chip selected" onclick="selectChip(this, 'group-level')">Iniciante</div>
-                    <div class="chip" onclick="selectChip(this, 'group-level')">Intermediário</div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Local de Treino</label>
-                <div class="chip-group" id="group-location">
-                    <div class="chip selected" onclick="selectChip(this, 'group-location')">Academia</div>
-                    <div class="chip" onclick="selectChip(this, 'group-location')">Casa</div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Tempo Disponível (Por treino)</label>
-                <select id="reg-duration">
-                    <option value="20 min">20 min</option>
-                    <option value="30 min">30 min</option>
-                    <option value="45 min" selected>45 min</option>
-                    <option value="60 min">60 min</option>
-                    <option value="90 min">90 min</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Dias Disponíveis</label>
-                <div class="chip-group" id="group-days">
-                    <div class="chip selected" onclick="toggleMultiChip(this)">Seg</div>
-                    <div class="chip selected" onclick="toggleMultiChip(this)">Ter</div>
-                    <div class="chip selected" onclick="toggleMultiChip(this)">Qua</div>
-                    <div class="chip selected" onclick="toggleMultiChip(this)">Qui</div>
-                    <div class="chip selected" onclick="toggleMultiChip(this)">Sex</div>
-                    <div class="chip" onclick="toggleMultiChip(this)">Sáb</div>
-                    <div class="chip" onclick="toggleMultiChip(this)">Dom</div>
-                </div>
-            </div>
-
-            <button class="btn-primary" style="margin-top:10px; margin-bottom: 20px;" onclick="processAI()">Salvar Perfil</button>
-        </div>
-
-        <div id="screen-loading-ia" class="screen">
-            <i class="fa-solid fa-brain" style="font-size: 60px; color: var(--primary); animation: pulse 1.5s infinite;"></i>
-            <h2 style="margin-top: 25px;" id="ia-status-title">Analisando seu perfil...</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;" id="ia-status-desc">A IA está gerando sua rotina ideal.</p>
-            <div class="loader" style="border-top-color: #fff;"></div>
         </div>
 
         <div id="screen-home" class="screen">
             <div class="app-header">
                 <div>
-                    <span style="color: var(--text-muted); font-size: 14px;">Bem-vindo de volta,</span>
-                    <h2 id="home-username">Usuário</h2>
+                    <span style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Painel Inteligente</span>
+                    <h2 style="font-size: 19px; font-weight: 700;">Monte sua Ficha</h2>
                 </div>
-                <div class="header-avatar-clickable" id="home-avatar-display" onclick="navigateTo('screen-customize')" title="Personalizar Perfil">
-                    💪
-                </div>
-            </div>
-
-            <div class="user-summary">
-                <div class="summary-card">
-                    <i class="fa-solid fa-weight-scale"></i>
-                    <div><span style="font-size: 11px; color: var(--text-muted); display:block;">Peso Atual</span><b id="home-weight">-- kg</b></div>
-                </div>
-                <div class="summary-card">
-                    <i class="fa-solid fa-bullseye"></i>
-                    <div><span style="font-size: 11px; color: var(--text-muted); display:block;">Objetivo</span><b id="home-goal" style="font-size:12px;">--</b></div>
-                </div>
-                <div class="summary-card">
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <div><span style="font-size: 11px; color: var(--text-muted); display:block;">Frequência</span><b id="home-days-count">0 dias</b></div>
-                </div>
-                <div class="summary-card">
-                    <i class="fa-solid fa-fire"></i>
-                    <div><span style="font-size: 11px; color: var(--text-muted); display:block;">Queimadas</span><b id="home-calories">0 kcal</b></div>
+                <div class="header-avatar-clickable" onclick="navigateTo('screen-customize')">
+                    <i id="home-avatar-icon" class="fa-solid fa-user-ninja"></i>
                 </div>
             </div>
 
-            <h3 class="header-margin">Menu Principal</h3>
-            <div class="menu-grid">
-                <div class="menu-item" onclick="navigateTo('screen-my-workout')">
-                    <i class="fa-solid fa-dumbbell"></i>
-                    <span>Meu Treino</span>
-                </div>
-                <div class="menu-item" onclick="navigateTo('screen-schedule')">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <span>Agenda</span>
-                </div>
-                <div class="menu-item" onclick="navigateTo('screen-evolution')">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <span>Evolução</span>
-                </div>
-                <div class="menu-item" onclick="navigateTo('screen-credits')">
-                    <i class="fa-solid fa-code"></i>
-                    <span>Criador</span>
+            <div class="filter-section">
+                <div class="filter-title">Gênero Biológico</div>
+                <div class="chip-group" id="filter-gender">
+                    <div class="chip selected" onclick="clearAndSelectChip(this, 'filter-gender')">Masculino</div>
+                    <div class="chip" onclick="clearAndSelectChip(this, 'filter-gender')">Feminino</div>
                 </div>
             </div>
-        </div>
 
-        <div id="screen-my-workout" class="screen">
-            <div class="screen-nav-header">
-                <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
-                <h2 style="font-size: 20px;">Plano de Treino IA</h2>
+            <div class="filter-section">
+                <div class="filter-title">Nível atual</div>
+                <div class="chip-group" id="filter-level">
+                    <div class="chip" onclick="clearAndSelectChip(this, 'filter-level')">Iniciante</div>
+                    <div class="chip selected" onclick="clearAndSelectChip(this, 'filter-level')">Intermediário</div>
+                    <div class="chip" onclick="clearAndSelectChip(this, 'filter-level')">Avançado</div>
+                </div>
             </div>
-            <p style="color:var(--text-muted); font-size:13px; margin-bottom: 20px;" id="workout-subtitle">Foco baseado no seu objetivo</p>
-            
-            <div id="workout-days-list" style="margin-bottom: 70px;"></div>
+
+            <div class="filter-section">
+                <div class="filter-title">Objetivo</div>
+                <div class="chip-group" id="filter-goal">
+                    <div class="chip selected" onclick="clearAndSelectChip(this, 'filter-goal')">Ganhar Massa</div>
+                    <div class="chip" onclick="clearAndSelectChip(this, 'filter-goal')">Emagrecer</div>
+                    <div class="chip" onclick="clearAndSelectChip(this, 'filter-goal')">Definição</div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Ambiente</div>
+                <div class="chip-group" id="filter-location">
+                    <div class="chip selected" onclick="clearAndSelectChip(this, 'filter-location')">Academia</div>
+                    <div class="chip" onclick="clearAndSelectChip(this, 'filter-location')">Casa</div>
+                </div>
+            </div>
+
+            <button class="btn-primary" style="margin-top: 5px; margin-bottom: 15px;" onclick="triggerWorkoutGeneration()">
+                <i class="fa-solid fa-gears"></i> Gerar Treino Semanal
+            </button>
+
+            <div class="loading-inline-box" id="generation-loader">
+                <i class="fa-solid fa-circle-notch"></i>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">Processando rotinas completas de alta queima...</p>
+            </div>
+
+            <div id="workout-results-wrapper" style="display: none;">
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--primary); text-transform: uppercase;"><i class="fa-solid fa-calendar-week"></i> Cronograma Síncrono:</h3>
+                <div id="workout-days-list"></div>
+            </div>
+
+            <h3 style="font-size: 13px; color: var(--text-muted); margin-top: 15px;">Ferramentas e Informações:</h3>
+            <div class="submenu-list">
+                <div class="submenu-row-item" onclick="navigateTo('screen-schedule')">
+                    <div>
+                        <i class="fa-solid fa-calendar-check icon-lead"></i>
+                        <span>Calendário de Frequência</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#555;"></i>
+                </div>
+                <div class="submenu-row-item" onclick="navigateTo('screen-credits')">
+                    <div>
+                        <i class="fa-solid fa-user-gear icon-lead"></i>
+                        <span>Informações do Criador</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#555;"></i>
+                </div>
+            </div>
         </div>
 
         <div id="screen-workout-active" class="screen">
-            <div class="screen-nav-header" style="justify-content: space-between; margin-bottom: 10px;">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <div class="btn-back" onclick="navigateTo('screen-my-workout')"><i class="fa-solid fa-arrow-left"></i></div>
-                    <h3 id="active-day-title" style="color: var(--primary); font-size: 18px;">Treino</h3>
-                </div>
+            <div class="screen-nav-header">
+                <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 id="active-day-title" style="color: var(--primary); font-size: 15px;">Treino Ativo</h3>
             </div>
 
-            <h2 id="active-exercise-name" style="margin-bottom: 15px;">Exercício</h2>
-            
-            <div class="exercise-image-placeholder" id="active-exercise-icon">
+            <div style="background: #1c1c1e; padding: 12px; border-radius: 10px; margin-bottom: 15px;">
+                <span style="font-size: 11px; color: var(--primary); font-weight: bold;">MOVIMENTO ATUAL:</span>
+                <h2 id="active-exercise-name" style="font-size: 19px; margin-top: 2px;">Nome do Exercício</h2>
+            </div>
+
+            <div class="exercise-image-placeholder">
                 <i class="fa-solid fa-dumbbell"></i>
             </div>
 
-            <div class="user-summary" style="margin-bottom: 20px;">
-                <div class="summary-card" style="justify-content: center; text-align: center;">
-                    <div><span style="font-size:11px; color:var(--text-muted);">SÉRIES</span><br><b id="active-series" style="font-size: 18px;">--</b></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                <div style="background: var(--card-bg); padding: 10px; border-radius: 8px; text-align: center;">
+                    <span style="font-size:11px; color:var(--text-muted);">SÉRIES</span><br><b id="active-series" style="font-size: 18px;">--</b>
                 </div>
-                <div class="summary-card" style="justify-content: center; text-align: center;">
-                    <div><span style="font-size:11px; color:var(--text-muted);">REPETIÇÕES</span><br><b id="active-reps" style="font-size: 18px;">--</b></div>
+                <div style="background: var(--card-bg); padding: 10px; border-radius: 8px; text-align: center;">
+                    <span style="font-size:11px; color:var(--text-muted);">REPETIÇÕES</span><br><b id="active-reps" style="font-size: 18px;">--</b>
                 </div>
-            </div>
-
-            <div class="summary-card" style="margin-bottom: 20px; justify-content: center;">
-                <i class="fa-solid fa-clock"></i>
-                <span style="font-size:14px; color:var(--text-muted);">Descanso recomendado: <b id="active-rest" style="color:white">--</b></span>
             </div>
 
             <div class="timer-display" id="timer-clock">00:00</div>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:auto; margin-bottom: 20px;">
-                <button class="btn-secondary" id="btn-timer-control" onclick="toggleTimer()">Iniciar Exercício</button>
-                <button class="btn-primary" onclick="finishExercise()">Concluir</button>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 15px;">
+                <button class="btn-secondary" id="btn-timer-control" onclick="toggleTimer()">Iniciar Intervalo</button>
+                <button class="btn-primary" onclick="finishCurrentExercise()">Avançar Movimento</button>
+            </div>
+
+            <div style="border-top: 1px solid #333; padding-top: 10px;">
+                <span style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 8px;">Lista Sequencial de Próximos:</span>
+                <div id="upcoming-exercises-queue" style="max-height: 140px; overflow-y: auto;"></div>
             </div>
         </div>
 
         <div id="screen-schedule" class="screen">
             <div class="screen-nav-header">
                 <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
-                <h2 style="font-size: 20px;">Agenda Semanal Real</h2>
+                <h2 style="font-size: 20px;">Calendário & Frequência</h2>
             </div>
-            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Acompanhe sua semana atual de forma sincronizada.</p>
 
             <div class="calendar-strip" id="calendar-strip-container"></div>
 
-            <div class="summary-card" style="margin-bottom: 20px; background-color: rgba(0, 191, 255, 0.05); border: 1px dashed var(--primary);">
-                <i class="fa-solid fa-circle-check"></i>
-                <div>
-                    <h4 style="font-size: 14px;">Marcar o treino de hoje</h4>
-                    <p style="font-size: 11px; color: var(--text-muted);">Apenas um registro é permitido a cada 24 horas.</p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Quanto tempo você treinou hoje?</label>
-                <select id="schedule-duration-input">
-                    <option value="20">20 minutos</option>
-                    <option value="30">30 minutos</option>
-                    <option value="45" selected>45 minutos</option>
-                    <option value="60">60 minutos</option>
-                    <option value="90">90 minutos</option>
+            <div style="margin-bottom: 16px; background: var(--card-bg); padding: 12px; border-radius: 10px;">
+                <label style="color: var(--primary); font-size:11px; font-weight:700;">INTENSIDADE DETECTADA</label>
+                <select id="schedule-intensity-input" style="width:100%; padding:10px; background:#2c2c2e; border:none; border-radius:6px; color:#fff; margin-top:5px;">
+                    <option value="Moderada" selected>Volume Moderado</option>
+                    <option value="Alta">Alta Intensidade (Até a Falha)</option>
                 </select>
             </div>
 
-            <div class="form-group" style="margin-bottom: 25px;">
-                <label>Intensidade do Treino</label>
-                <select id="schedule-intensity-input">
-                    <option value="Leve">Leve</option>
-                    <option value="Moderada" selected>Moderada</option>
-                    <option value="Alta">Alta</option>
-                </select>
-            </div>
-
-            <button class="btn-primary" id="btn-submit-workout" onclick="registerTodayWorkout()">Registrar Treino Concluído</button>
-            <div id="lock-timer-msg" class="lock-notice">🔒 Sistema Bloqueado. Próximo treino disponível em: --:--:--</div>
+            <button class="btn-primary" id="btn-submit-workout" onclick="registerTodayWorkout()">Registrar Treino de Hoje</button>
+            <div id="lock-timer-msg" class="lock-notice">🔒 Sistema Antifraude: Próximo treino disponível após 24h.</div>
             
             <div id="calorie-result-box" style="margin-top: 20px; padding: 15px; background-color: var(--card-bg); border-radius: 12px; display: none; text-align: center;">
-                <i class="fa-solid fa-fire-flame-curved" style="color: var(--accent); font-size: 24px; margin-bottom: 8px;"></i>
-                <p id="calorie-result-text" style="font-size: 14px; font-weight:600;"></p>
-            </div>
-        </div>
-
-        <div id="screen-evolution" class="screen">
-            <div class="screen-nav-header">
-                <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
-                <h2 style="font-size: 20px;">Evolução Física</h2>
-            </div>
-            <p style="color:var(--text-muted); font-size: 13px; margin-bottom: 20px;">Acompanhamento das metas semanais.</p>
-
-            <label>Dias Treinados (Semanas Anteriores)</label>
-            <div class="mock-chart">
-                <div class="chart-bar" style="height: 40%"></div>
-                <div class="chart-bar" style="height: 60%"></div>
-                <div class="chart-bar" style="height: 20%"></div>
-                <div class="chart-bar" style="height: 85%"></div>
-                <div class="chart-bar" id="chart-current-bar" style="height: 0%"></div>
-            </div>
-
-            <h3 class="header-margin">Metas e Conquistas</h3>
-            <div id="gamification-box" style="margin-bottom: 70px;">
-                <div class="badge-card" id="badge-1">
-                    <span class="badge-icon">🏅</span>
-                    <div>
-                        <h4 style="font-size:14px;">Primeiro Passo</h4>
-                        <p style="font-size:11px; color:var(--text-muted);">Conclua o primeiro treino registrado.</p>
-                    </div>
-                    <div class="badge-status" id="status-badge-1">Bloqueado</div>
-                </div>
-                <div class="badge-card" id="badge-2">
-                    <span class="badge-icon">🔥</span>
-                    <div>
-                        <h4 style="font-size:14px;">Foco Total</h4>
-                        <p style="font-size:11px; color:var(--text-muted);">Queime mais de 400 calorias em um único dia.</p>
-                    </div>
-                    <div class="badge-status" id="status-badge-2">Bloqueado</div>
-                </div>
-                <div class="badge-card" id="badge-3">
-                    <span class="badge-icon">👑</span>
-                    <div>
-                        <h4 style="font-size:14px;">Consistência Absoluta</h4>
-                        <p style="font-size:11px; color:var(--text-muted);">Atinja 3 dias de treinos na mesma semana.</p>
-                    </div>
-                    <div class="badge-status" id="status-badge-3">Bloqueado</div>
-                </div>
+                <i class="fa-solid fa-circle-check" style="color: var(--success); font-size: 24px;"></i>
+                <p id="calorie-result-text" style="font-size: 14px; font-weight:600; margin-top:5px;"></p>
             </div>
         </div>
 
         <div id="screen-credits" class="screen">
             <div class="screen-nav-header">
                 <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
-                <h2 style="font-size: 20px;">Criador</h2>
+                <h2 style="font-size: 20px;">Criador do Projeto</h2>
             </div>
             
-            <div style="text-align: center; margin: 20px 0;">
-                <div style="width: 80px; height: 80px; background-color: var(--card-bg); border: 2px solid var(--primary); border-radius: 50%; margin: 0 auto 15px; display:flex; justify-content:center; align-items:center; font-size:36px;">
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="width: 90px; height: 90px; background-color: var(--card-bg); border: 2px solid var(--primary); border-radius: 50%; margin: 0 auto 15px; display:flex; justify-content:center; align-items:center; font-size:40px;">
                     👨‍💻
                 </div>
-                <h3>José Victor</h3>
-                <p style="color: var(--primary); font-size:14px; font-weight:600; margin-top: 5px;">Idealizador e Desenvolvedor</p>
-                <p style="color: var(--text-muted); font-size:12px; max-width: 280px; margin: 10px auto;">Unindo tecnologia inteligente com performance física de ponta.</p>
+                <h2 style="font-size: 24px; font-weight: 700;">José Victor</h2>
+                <p style="color: var(--primary); font-size:14px; font-weight:600; margin-top: 5px;">Idealizador & Desenvolvedor Líder</p>
+                <p style="color: var(--text-muted); font-size:12px; margin-top:15px; padding: 0 10px;">Responsável direto pela arquitetura estruturada e motor dinâmico de divisão avançada de treinos deste ecossistema.</p>
             </div>
 
-            <h4 style="text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 14px;">Entre em Contato</h4>
-            
+            <h3 style="font-size:14px; text-align:center; color:var(--text-muted); margin-bottom: 10px;">Canais oficiais de suporte:</h3>
             <div class="social-buttons-container">
-                <a href="https://instagram.com/cacheadinho_0fc" target="_blank" class="social-round-btn instagram" title="Siga no Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="https://wa.me/5579998558716" target="_blank" class="social-round-btn whatsapp" title="Chame no WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-            </div>
-
-            <div style="background-color: var(--card-bg); padding:15px; border-radius:12px; font-size:11px; color: var(--text-muted); margin-top: auto; margin-bottom: 20px;">
-                <b>Tecnologias de Arquitetura do App Real:</b><br>
-                Frontend: Flutter | Backend: Firebase Firestore | Auth: Google/E-mail | Charts: FL Chart.
+                <a href="https://instagram.com/cacheadinho_0fc" target="_blank" class="social-round-btn instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/5579998558716" target="_blank" class="social-round-btn whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
 
         <div id="screen-customize" class="screen">
             <div class="screen-nav-header">
                 <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
-                <h2 style="font-size: 20px;">Editar Perfil</h2>
+                <h2 style="font-size: 20px;">Avatar Estilo Gibi</h2>
             </div>
-            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Modifique sua identidade visual dentro do aplicativo.</p>
-
-            <div class="form-group">
-                <label>Alterar Nome</label>
-                <input type="text" id="cust-name-input" placeholder="Seu nome">
-            </div>
-
-            <div class="form-group">
-                <label>Escolha o seu Avatar</label>
-                <div class="avatar-selection-grid">
-                    <div class="avatar-option selected" onclick="selectAvatar(this, '💪')">💪</div>
-                    <div class="avatar-option" onclick="selectAvatar(this, '⚡')">⚡</div>
-                    <div class="avatar-option" onclick="selectAvatar(this, '🔥')">🔥</div>
-                    <div class="avatar-option" onclick="selectAvatar(this, '👑')">👑</div>
-                </div>
-            </div>
-
-            <button class="btn-primary" style="margin-top: 30px;" onclick="saveProfileCustomization()">Salvar Alterações</button>
-        </div>
-
-        <div class="bottom-nav hidden-nav" id="global-bottom-nav">
-            <div class="nav-item active" id="nav-home" onclick="navigateTo('screen-home')">
-                <i class="fa-solid fa-house"></i>Home
-            </div>
-            <div class="nav-item" id="nav-workout" onclick="navigateTo('screen-my-workout')">
-                <i class="fa-solid fa-dumbbell"></i>Treinos
-            </div>
-            <div class="nav-item" id="nav-evo" onclick="navigateTo('screen-evolution')">
-                <i class="fa-solid fa-chart-line"></i>Evolução
-            </div>
+            <div class="avatar-selection-grid" id="avatar-ia-options-container"></div>
+            <button class="btn-primary" style="margin-top: 20px;" onclick="saveProfileCustomization()">Confirmar Personagem</button>
         </div>
 
     </div>
 
     <script>
-        // ESTADO GLOBAL DO APLICATIVO
-        let userProfile = {
-            name: "",
-            avatar: "💪",
-            age: 0,
-            gender: "Masculino",
-            height: 0,
-            weight: 0,
-            goal: "",
-            level: "",
-            location: "",
-            duration: "",
-            days: []
-        };
-
-        let AppStats = {
-            trainedDaysCount: 0,
-            caloriesBurned: 0,
-            completedDaysList: [],
-            totalMinutes: 0
-        };
-
-        let restrictionTimerInterval = null;
-
-        const AIDatabase = {
-            "Academia": {
-                "Iniciante": {
-                    "Seg": { title: "Peito e Tríceps", exercises: [{name: "Supino Reto na Máquina", s:"3", r:"12", t:"60s"}, {name: "Pec Deck Fly", s:"3", r:"15", t:"45s"}, {name: "Tríceps Pulley", s:"3", r:"12", t:"60s"}] },
-                    "Ter": { title: "Costas e Bíceps", exercises: [{name: "Puxada Alta na Frente", s:"3", r:"12", t:"60s"}, {name: "Remada Baixa Sentado", s:"3", r:"15", t:"60s"}, {name: "Rosca Direta Halteres", s:"3", r:"12", t:"45s"}] },
-                    "Qua": { title: "Pernas Completo", exercises: [{name: "Leg Press 45", s:"3", r:"15", t:"90s"}, {name: "Cadeira Extensora", s:"3", r:"12", t:"45s"}, {name: "Cadeira Flexora", s:"3", r:"12", t:"45s"}] },
-                    "Qui": { title: "Ombros e Trapézio", exercises: [{name: "Desenvolvimento Halteres", s:"3", r:"12", t:"60s"}, {name: "Elevação Lateral", s:"3", r:"15", t:"45s"}, {name: "Encolhimento Halter", s:"3", r:"15", t:"45s"}] },
-                    "Sex": { title: "Abdômen + Cardio", exercises: [{name: "Abdominal Supra Solo", s:"4", r:"20", t:"45s"}, {name: "Prancha Isométrica", s:"3", r:"30s", t:"45s"}, {name: "Esteira Ritmo Moderado", s:"1", r:"20 min", t:"0s"}] },
-                    "Sáb": { title: "Descanso Ativo", exercises: [{name: "Caminhada Leve ao Ar Livre", s:"1", r:"30 min", t:"0s"}] },
-                    "Dom": { title: "Descanso Total", exercises: [{name: "Recuperação Muscular completa", s:"0", r:"0", t:"0"}] }
+        // MATRIZ DE TREINOS EXPANDIDA (MÍNIMO 4 EXERCÍCIOS CONECTADOS POR GRUPO PARA MÁXIMO RESULTADO)
+        const COMPREHENSIVE_TRAINING_MATRIX = {
+            "Masculino": {
+                "Academia": {
+                    "Iniciante": {
+                        "Seg": { id: "m_ac_in_seg", title: "Peitoral Base & Tríceps", exercises: [{name:"Supino Reto deitado", s:"3", r:"12"}, {name:"Voador Máquina", s:"3", r:"12"}, {name:"Crucifixo Halter", s:"3", r:"12"}, {name:"Tríceps Pulley", s:"3", r:"12"}] },
+                        "Ter": { id: "m_ac_in_ter", title: "Dorsais Estrutura & Bíceps", exercises: [{name:"Puxada Frontal Alta", s:"3", r:"12"}, {name:"Remada Baixa Sentada", s:"3", r:"12"}, {name:"Remada Serrote", s:"3", r:"12"}, {name:"Rosca Direta Polia", s:"3", r:"12"}] },
+                        "Qua": { id: "m_ac_in_qua", title: "Coxas & Quadríceps", exercises: [{name:"Leg Press 45", s:"3", r:"15"}, {name:"Cadeira Extensora", s:"3", r:"15"}, {name:"Mesa Flexora", s:"3", r:"12"}, {name:"Gêmeos em Pé", s:"3", r:"20"}] },
+                        "Qui": { id: "m_ac_in_qui", title: "Deltoides & Core", exercises: [{name:"Desenvolvimento Halter", s:"3", r:"12"}, {name:"Elevação Lateral", s:"3", r:"12"}, {name:"Abdominal Remador", s:"3", r:"15"}, {name:"Prancha Solo", s:"3", r:"30s"}] },
+                        "Sex": { id: "m_ac_in_sex", title: "Cardio Gasto & Queima", exercises: [{name:"Esteira Ritmo Corrida", s:"1", r:"15 min"}, {name:"Bicicleta Ergométrica", s:"1", r:"15 min"}, {name:"Elíptico Cadência", s:"1", r:"10 min"}, {name:"Abdominal Infra Solo", s:"3", r:"15"}] },
+                        "Sáb": { id: "m_ac_in_sab", title: "Fullbody Regulador", exercises: [{name:"Puxada Alta Neutra", s:"3", r:"12"}, {name:"Supino Articulado", s:"3", r:"12"}, {name:"Cadeira Extensora", s:"3", r:"12"}, {name:"Caminhada Rápida", s:"1", r:"20 min"}] }
+                    },
+                    "Intermediário": {
+                        "Seg": { id: "m_ac_int_seg", title: "Peito Sup. & Tríceps Carga", exercises: [{name:"Supino Inclinado Halter", s:"4", r:"12"}, {name:"Supino Reto Barra", s:"4", r:"10"}, {name:"Crucifixo Inclinado", s:"3", r:"12"}, {name:"Tríceps Testa W", s:"4", r:"10"}] },
+                        "Ter": { id: "m_ac_int_ter", title: "Dorsais Largura & Bíceps", exercises: [{name:"Remada Curvada Barra", s:"4", r:"10"}, {name:"Puxada Alta Pronada", s:"4", r:"12"}, {name:"Pulldown Corda", s:"3", r:"12"}, {name:"Rosca Alternada", s:"4", r:"10"}] },
+                        "Qua": { id: "m_ac_int_qua", title: "Membros Inferiores Força", exercises: [{name:"Agachamento Livre", s:"4", r:"10"}, {name:"Leg Press 45°", s:"4", r:"12"}, {name:"Stiff com Barra", s:"4", r:"10"}, {name:"Cadeira Flexora", s:"4", r:"12"}] },
+                        "Qui": { id: "m_ac_int_qui", title: "Ombros Volumosos & Tríceps", exercises: [{name:"Desenvolvimento Militar", s:"4", r:"10"}, {name:"Elevação Lateral Polia", s:"4", r:"12"}, {name:"Crucifixo Invertido", s:"3", r:"12"}, {name:"Tríceps Corda Polia", s:"4", r:"12"}] },
+                        "Sex": { id: "m_ac_int_sex", title: "Bíceps Fokus & Abdomen", exercises: [{name:"Rosca Scott Barra W", s:"4", r:"10"}, {name:"Rosca Martelo Halter", s:"4", r:"12"}, {name:"Abdominal Vela", s:"4", r:"15"}, {name:"Prancha Dinâmica", s:"4", r:"45s"}] },
+                        "Sáb": { id: "m_ac_int_sab", title: "Cardio HIIT Queima Atleta", exercises: [{name:"Corrida Esteira Intervalo", s:"1", r:"20 min"}, {name:"Bike Tiro Explosivo", s:"1", r:"10 min"}, {name:"Abdominal Canivete", s:"4", r:"15"}, {name:"Lombar Banco", s:"3", r:"15"}] }
+                    },
+                    "Avançado": {
+                        "Seg": { id: "m_ac_av_seg", title: "Peito Destruição FST-7", exercises: [{name:"Supino Reto Pesado", s:"4", r:"8"}, {name:"Supino Inclinado Barra", s:"4", r:"8"}, {name:"Crucifixo CrossOver", s:"7", r:"12"}, {name:"Tríceps Paralelas Carga", s:"4", r:"Falha"}] },
+                        "Ter": { id: "m_ac_av_ter", title: "Dorsal Densidade Extrema", exercises: [{name:"Levantamento Terra", s:"4", r:"6"}, {name:"Puxada Barra Fixa", s:"4", r:"Falha"}, {name:"Remada Cavalinho Pesada", s:"4", r:"8"}, {name:"Rosca Direta W Scott", s:"4", r:"10"}] },
+                        "Qua": { id: "m_ac_av_qua", title: "Quebra de Platô Inferiores", exercises: [{name:"Agachamento Livre Barra", s:"5", r:"6"}, {name:"Hack Squat 45", s:"4", r:"10"}, {name:"Cadeira Extensora Drop", s:"4", r:"10+10"}, {name:"Mesa Flexora Exaustão", s:"4", r:"12"}] },
+                        "Qui": { id: "m_ac_av_qui", title: "Deltoides 3D Pro", exercises: [{name:"Desenvolvimento Arnold", s:"4", r:"10"}, {name:"Elevação Lateral Drop", s:"4", r:"10+10"}, {name:"Remada Alta Polia", s:"4", r:"12"}, {name:"Abdominal Suspenso", s:"4", r:"15"}] },
+                        "Sex": { id: "m_ac_av_sex", title: "SuperSet Braços Gigantes", exercises: [{name:"Rosca Direta + Tríceps Testa", s:"4", r:"10"}, {name:"Rosca Concentrada Solo", s:"4", r:"12"}, {name:"Tríceps Corda Exaustão", s:"4", r:"12"}, {name:"Rosca Inversa Braquial", s:"3", r:"15"}] },
+                        "Sáb": { id: "m_ac_av_sab", title: "Estímulo Pontual & HIIT", exercises: [{name:"Gêmeos Sentado Máquina", s:"5", r:"25"}, {name:"Encolhimento Halter", s:"4", r:"15"}, {name:"Corrida HIIT Esteira", s:"1", r:"25 min"}, {name:"Prancha Isométrica Carga", s:"4", r:"1 min"}] }
+                    }
                 },
-                "Intermediário": {
-                    "Seg": { title: "Peito Superior e Tríceps", exercises: [{name: "Supino Inclinado Halteres", s:"4", r:"10", t:"60s"}, {name: "Crucifixo Reto", s:"4", r:"12", t:"60s"}, {name: "Tríceps Testa Barra W", s:"4", r:"10", t:"60s"}] },
-                    "Ter": { title: "Dorsais de Alta Densidade", exercises: [{name: "Levantamento Terra", s:"4", r:"8", t:"90s"}, {name: "Remada Curvada Pronada", s:"4", r:"10", t:"60s"}, {name: "Rosca Scott Isolada", s:"4", r:"12", t:"45s"}] },
-                    "Qua": { title: "Membros Inferiores Força", exercises: [{name: "Agachamento Livre Barra", s:"4", r:"10", t:"90s"}, {name: "Stiff com Halteres", s:"4", r:"12", t:"60s"}, {name: "Afundo com Halteres", s:"4", r:"10 por perna", t:"60s"}] },
-                    "Qui": { title: "Ombros (Hipertrofia Dinâmica)", exercises: [{name: "Desenvolvimento Militar", s:"4", r:"10", t:"60s"}, {name: "Elevação Posterior de Ombros", s:"4", r:"12", t:"45s"}, {name: "Remada Alta", s:"4", r:"10", t:"60s"}] },
-                    "Sex": { title: "Core Intenso e HIIT", exercises: [{name: "Abdominal Infra na Paralela", s:"4", r:"15", t:"45s"}, {name: "Prancha Abdominal Dinâmica", s:"4", r:"45s", t:"45s"}, {name: "Tiro na Esteira (HIIT)", s:"8", r:"30s active/30s des", t:"30s"}] },
-                    "Sáb": { title: "Cardio Regenerativo", exercises: [{name: "Bicicleta Ergométrica", s:"1", r:"45 min", t:"0"}] },
-                    "Dom": { title: "Descanso Total", exercises: [{name: "Recuperação Muscular", s:"0", r:"0", t:"0"}] }
+                "Casa": {
+                    "Iniciante": {
+                        "Seg": { id: "m_ca_in_seg", title: "Superior Calistenia Base", exercises: [{name:"Flexão Braço de Joelhos", s:"3", r:"10"}, {name:"Tríceps Banco Cadeira", s:"3", r:"12"}, {name:"Flexão Aberta Parede", s:"3", r:"12"}, {name:"Prancha Estática Solo", s:"3", r:"30s"}] },
+                        "Ter": { id: "m_ca_in_ter", title: "Pernas Peso Corporal", exercises: [{name:"Agachamento Livre", s:"4", r:"15"}, {name:"Elevação Pélvica Solo", s:"3", r:"15"}, {name:"Afundo Estático", s:"3", r:"12"}, {name:"Gêmeos em Pé Chão", s:"4", r:"20"}] },
+                        "Qua": { id: "m_ca_in_qua", title: "Gasto Calórico / Cardio", exercises: [{name:"Polichinelos Ritmo", s:"3", r:"45s"}, {name:"Corrida Parada no Lugar", s:"3", r:"1 min"}, {name:"Escalador de Montanha", s:"3", r:"30s"}, {name:"Abdominal Supra", s:"3", r:"15"}] },
+                        "Qui": { id: "m_ca_in_qui", title: "Core & Abs Queima", exercises: [{name:"Abdominal Remador", s:"3", r:"15"}, {name:"Abdominal Infra Solo", s:"3", r:"15"}, {name:"Prancha Lateral Esquerda", s:"2", r:"20s"}, {name:"Prancha Lateral Direita", s:"2", r:"20s"}] },
+                        "Sex": { id: "m_ca_in_sex", title: "Membros Inferiores Tonus", exercises: [{name:"Agachamento Sumô", s:"4", r:"15"}, {name:"Passada Caminhada", s:"3", r:"16 passos"}, {name:"Elevação Pélvica Isometria", s:"3", r:"30s"}, {name:"Gêmeos Unilateral", s:"3", r:"12"}] },
+                        "Sáb": { id: "m_ca_in_sab", title: "Fullbody Alonga Ativo", exercises: [{name:"Agachamento Isométrico", s:"3", r:"30s"}, {name:"Flexão na Cadeira Escada", s:"3", r:"10"}, {name:"Abdominal Borboleta", s:"3", r:"15"}, {name:"Polichinelos Finais", s:"3", r:"30s"}] }
+                    },
+                    "Intermediário": {
+                        "Seg": { id: "m_ca_int_seg", title: "Superior Calistenia Inter", exercises: [{name:"Flexão de Braço Padrão", s:"4", r:"12"}, {name:"Flexão Aberta Solo", s:"4", r:"12"}, {name:"Tríceps Banco Cadeira", s:"4", r:"15"}, {name:"Flexão Diamante Joelhos", s:"3", r:"10"}] },
+                        "Ter": { id: "m_ca_int_ter", title: "Pernas Unilateral Avanço", exercises: [{name:"Agachamento Búlgaro", s:"4", r:"12"}, {name:"Agachamento Sumô Pausa", s:"4", r:"15"}, {name:"Stiff Unilateral Corporal", s:"4", r:"12"}, {name:"Elevação Pélvica 1 Perna", s:"4", r:"12"}] },
+                        "Qua": { id: "m_ca_int_qua", title: "Resistência & HIIT", exercises: [{name:"Burpees Intermediários", s:"4", r:"10"}, {name:"Escalador de Montanha", s:"4", r:"40s"}, {name:"Saltos Pliométricos Chão", s:"4", r:"12"}, {name:"Abdominal Canivete", s:"4", r:"15"}] },
+                        "Qui": { id: "m_ca_int_qui", title: "Ombros & Tríceps Fokus", exercises: [{name:"Flexão Pike (Ombros)", s:"4", r:"10"}, {name:"Flexão Arquitetônica", s:"4", r:"12"}, {name:"Tríceps Extensão Chão", s:"4", r:"12"}, {name:"Prancha Dinâmica Sobe", s:"4", r:"15"}] },
+                        "Sex": { id: "m_ca_int_sex", title: "Posterior Coxa Fokus", exercises: [{name:"Stiff Unilateral Chão", s:"4", r:"12"}, {name:"Elevação Pélvica Unilateral", s:"4", r:"12"}, {name:"Agachamento Isométrico Parede", s:"4", r:"45s"}, {name:"Gêmeos em Pé", s:"4", r:"25"}] },
+                        "Sáb": { id: "m_ca_int_sab", title: "Core Avançado Queima", exercises: [{name:"Prancha Dinâmica Movimento", s:"4", r:"15"}, {name:"Abdominal Canivete V-Up", s:"4", r:"15"}, {name:"Bicicleta Abdominal", s:"4", r:"25"}, {name:"Burpees Finais", s:"3", r:"8"}] }
+                    },
+                    "Avançado": {
+                        "Seg": { id: "m_ca_av_seg", title: "Peitoral Explosão Total", exercises: [{name:"Flexão de Braço com Palma", s:"4", r:"10"}, {name:"Flexão Declinada Sofá", s:"4", r:"15"}, {name:"Flexão Homem-Aranha", s:"4", r:"12"}, {name:"Flexão Diamante Chão", s:"4", r:"12"}] },
+                        "Ter": { id: "m_ca_av_ter", title: "Inferiores Quebra Fibra", exercises: [{name:"Pistol Squat (1 Perna)", s:"4", r:"8"}, {name:"Agachamento com Salto", s:"4", r:"15"}, {name:"Afundo Saltando Alternado", s:"4", r:"20"}, {name:"Agachamento Isométrico Carga", s:"4", r:"1 min"}] },
+                        "Qua": { id: "m_ca_av_qua", title: "Circuito HIIT Destruidor", exercises: [{name:"Burpees Completos", s:"5", r:"15"}, {name:"Saltos Verticais Caixa", s:"4", r:"15"}, {name:"Corrida Joelho Alto", s:"4", r:"45s"}, {name:"Abdominal Canivete Peso", s:"4", r:"20"}] },
+                        "Qui": { id: "m_ca_av_qui", title: "Superior Calistenia Elite", exercises: [{name:"Flexão Pike Pés Elevados", s:"4", r:"12"}, {name:"Tríceps Extensão Chão", s:"4", r:"12"}, {name:"Flexão Arqueiro", s:"4", r:"10"}, {name:"Prancha Isométrica 1 Mão", s:"4", r:"30s"}] },
+                        "Sex": { id: "m_ca_av_sex", title: "Glúteos & Isquios Extremo", exercises: [{name:"Agachamento Búlgaro Isometria", s:"4", r:"10"}, {name:"Elevação Pélvica Unilateral Carga", s:"4", r:"20"}, {name:"Stiff Unilateral Carga Extra", s:"4", r:"15"}, {name:"Gêmeos Unilateral", s:"4", r:"20"}] },
+                        "Sáb": { id: "m_ca_av_sab", title: "Core & Gasto Elite", exercises: [{name:"Abdominal V-Up Canivete", s:"4", r:"20"}, {name:"Prancha Isométrica", s:"4", r:"1min"}, {name:"Bicicleta Abs Velocidade", s:"4", r:"40"}, {name:"Burpees Finais Exaustão", s:"4", r:"15"}] }
+                    }
                 }
             },
-            "Casa": {
-                "Iniciante": {
-                    "Seg": { title: "Peito e Tríceps em Casa", exercises: [{name: "Flexão de Braço Com Joelhos", s:"3", r:"10", t:"60s"}, {name: "Flexão Inclina na Cadeira", s:"3", r:"12", t:"60s"}, {name: "Tríceps Banco (Sofá)", s:"3", r:"12", t:"45s"}] },
-                    "Ter": { title: "Pernas Peso Corporal", exercises: [{name: "Agachamento Livre", s:"3", r:"15", t:"60s"}, {name: "Elevação Pélvica no Solo", s:"3", r:"15", t:"45s"}, {name: "Panturrilha em Pé Solo", s:"3", r:"20", t:"45s"}] },
-                    "Qua": { title: "Costas e Bíceps Adaptado", exercises: [{name: "Remada Curvada com Mochila", s:"3", r:"15", t:"60s"}, {name: "Supermans (Lombar)", s:"3", r:"12", t:"45s"}, {name: "Rosca Direta com Garrafas PET", s:"3", r:"15", t:"45s"}] },
-                    "Qui": { title: "Ombros Peso Corporal", exercises: [{name: "Elevação Lateral com Garrafas", s:"3", r:"15", t:"45s"}, {name: "Desenvolvimento com Mochila Carga", s:"3", r:"12", t:"60s"}, {name: "Crucifixo Invertido Livre", s:"3", r:"15", t:"45s"}] },
-                    "Sex": { title: "Abdômen + Cardio Queima", exercises: [{name: "Abdominal Remador", s:"3", r:"15", t:"45s"}, {name: "Polichinelos Ritmo Médio", s:"3", r:"45 segundos", t:"30s"}, {name: "Corrida Estacionária", s:"3", r:"1 minuto", t:"30s"}] },
-                    "Sáb": { title: "Alongamento Ativo", exercises: [{name: "Alongamento de Corpo Inteiro", s:"1", r:"15 min", t:"0"}] },
-                    "Dom": { title: "Descanso Total", exercises: [{name: "Descanso", s:"0", r:"0", t:"0"}] }
+            "Feminino": {
+                "Academia": {
+                    "Iniciante": {
+                        "Seg": { id: "f_ac_in_seg", title: "Glúteos & Pernas Base", exercises: [{name:"Agachamento Smith", s:"3", r:"12"}, {name:"Leg Press Horizontal", s:"3", r:"12"}, {name:"Cadeira Abdutora", s:"3", r:"15"}, {name:"Elevação Pélvica Máquina", s:"3", r:"12"}] },
+                        "Ter": { id: "f_ac_in_ter", title: "Superiores Esculpidos Leve", exercises: [{name:"Puxada Frontal Pulley", s:"3", r:"12"}, {name:"Desenvolvimento Halteres", s:"3", r:"12"}, {name:"Elevação Lateral Halter", s:"3", r:"12"}, {name:"Tríceps Corda Polia", s:"3", r:"12"}] },
+                        "Qua": { id: "f_ac_in_qua", title: "Cadeia Posterior & Isquios", exercises: [{name:"Cadeira Flexora", s:"3", r:"12"}, {name:"Elevação Pélvica Solo", s:"3", r:"15"}, {name:"Stiff Leve com Halteres", s:"3", r:"12"}, {name:"Cadeira Adutora", s:"3", r:"15"}] },
+                        "Qui": { id: "f_ac_in_qui", title: "Abdomen & Cintura Fokus", exercises: [{name:"Abdominal Remador", s:"3", r:"15"}, {name:"Prancha Solo Isometria", s:"3", r:"30s"}, {name:"Abdominal Infra Solo", s:"3", r:"15"}, {name:"Bicicleta Abdominal", s:"3", r:"20"}] },
+                        "Sex": { id: "f_ac_in_sex", title: "Membros Inferiores Isolados", exercises: [{name:"Cadeira Extensora", s:"3", r:"15"}, {name:"Cadeira Abdutora Inclinada", s:"3", r:"15"}, {name:"Glúteo Quatro Apoios Solo", s:"3", r:"15"}, {name:"Panturrilha Leg Horizontal", s:"4", r:"20"}] },
+                        "Sáb": { id: "f_ac_in_sab", title: "Cardio Gasto Energético", exercises: [{name:"Esteira Caminhada Rápida", s:"1", r:"15 min"}, {name:"Bicicleta Ergométrica", s:"1", r:"15 min"}, {name:"Elíptico Constante", s:"1", r:"10 min"}, {name:"Abdominal Supra", s:"3", r:"15"}] }
+                    },
+                    "Intermediário": {
+                        "Seg": { id: "f_ac_int_seg", title: "Coxas Quadríceps Volume", exercises: [{name:"Agachamento Livre Barra", s:"4", r:"10"}, {name:"Leg Press 45 Graus", s:"4", r:"12"}, {name:"Agachamento Búlgaro Halter", s:"3", r:"12"}, {name:"Cadeira Extensora", s:"4", r:"12"}] },
+                        "Ter": { id: "f_ac_int_ter", title: "Dorsal, Ombro & Tríceps", exercises: [{name:"Puxada Aberta Pulley", s:"3", r:"12"}, {name:"Elevação Lateral Polia", s:"3", r:"15"}, {name:"Remada Baixa Triângulo", s:"3", r:"12"}, {name:"Tríceps Testa Halter", s:"3", r:"12"}] },
+                        "Qua": { id: "f_ac_int_qua", title: "Foco Total Glúteo Isolado", exercises: [{name:"Elevação Pélvica Carga Barra", s:"4", r:"15"}, {name:"Glúteo Cabo Polia Coice", s:"3", r:"15"}, {name:"Cadeira Abdutora DropSet", s:"4", r:"12+15"}, {name:"Glúteo Máquina Vertical", s:"3", r:"12"}] },
+                        "Qui": { id: "f_ac_int_qui", title: "Abdomen Infra/Supra Circuit", exercises: [{name:"Abdominal Vela Elevação", s:"4", r:"15"}, {name:"Prancha Isométrica", s:"3", r:"1 min"}, {name:"Abdominal Infra Banco", s:"4", r:"15"}, {name:"Prancha Lateral Esfinge", s:"3", r:"30s"}] },
+                        "Sex": { id: "f_ac_int_sex", title: "Posterior Coxa Intensidade", exercises: [{name:"Stiff com Halteres", s:"4", r:"12"}, {name:"Cadeira Flexora DropSet", s:"4", r:"10+12"}, {name:"Mesa Flexora Deitada", s:"3", r:"12"}, {name:"Cadeira Adutora Compressão", s:"4", r:"15"}] },
+                        "Sáb": { id: "f_ac_int_sab", title: "Cardio Queima Gordura HIIT", exercises: [{name:"Corrida Esteira HIIT Tiros", s:"1", r:"15 min"}, {name:"Elíptico Carga Alta", s:"1", r:"15 min"}, {name:"Abdominal Canivete", s:"4", r:"15"}, {name:"Gêmeos em Pé Carga", s:"4", r:"20"}] }
+                    },
+                    "Avançado": {
+                        "Seg": { id: "f_ac_av_seg", title: "Inferiores Construção Glúteos", exercises: [{name:"Agachamento Livre Carga", s:"4", r:"8"}, {name:"Elevação Pélvica DropSet", s:"4", r:"10+12"}, {name:"Agachamento Búlgaro Halter", s:"4", r:"10"}, {name:"Cadeira Abdutora 3 Tempos", s:"4", r:"12"}] },
+                        "Ter": { id: "f_ac_av_ter", title: "Superiores Linhas Definidas", exercises: [{name:"Puxada Frontal Supinada", s:"4", r:"10"}, {name:"Desenvolvimento Arnold", s:"3", r:"12"}, {name:"Remada Curvada Barra", s:"4", r:"12"}, {name:"Tríceps Pulley Supinado", s:"4", r:"12"}] },
+                        "Qua": { id: "f_ac_av_qua", title: "Isquiotibiais & Glúteo Pump", exercises: [{name:"Stiff com Barra Longo", s:"4", r:"10"}, {name:"Agachamento Sumô Halter", s:"4", r:"12"}, {name:"Cadeira Flexora Exaustão", s:"4", r:"12"}, {name:"Glúteo Polia Diagonal", s:"4", r:"12"}] },
+                        "Qui": { id: "f_ac_av_qui", title: "Core Abs & HIIT Cardio", exercises: [{name:"Abdominal Suspenso Barra", s:"4", r:"15"}, {name:"Burpees Completos", s:"4", r:"12"}, {name:"Corrida Esteira Velocidade", s:"1", r:"20 min"}, {name:"Prancha Isométrica Peso", s:"4", r:"1 min"}] },
+                        "Sex": { id: "f_ac_av_sex", title: "Pernas Completas Exaustão", exercises: [{name:"Leg Press 45 DropSet", s:"3", r:"10+12"}, {name:"Cadeira Extensora Drop", s:"3", r:"10+15"}, {name:"Agachamento Hack Máquina", s:"4", r:"10"}, {name:"Cadeira Adutora Limite", s:"4", r:"15"}] },
+                        "Sáb": { id: "f_ac_av_sab", title: "Estética Abdutores & Gêmeos", exercises: [{name:"Cadeira Abdutora Tronco Frente", s:"4", r:"20"}, {name:"Gêmeos em Pé Barra Smith", s:"4", r:"20"}, {name:"Abdominal Remador Carga", s:"4", r:"20"}, {name:"Bike Spinning Tiros", s:"1", r:"15 min"}] }
+                    }
                 },
-                "Intermediário": {
-                    "Seg": { title: "Peito e Tríceps Calistenia", exercises: [{name: "Flexão de Braço Clássica", s:"4", r:"15", t:"60s"}, {name: "Flexão Declinada (Pés no sofá)", s:"4", r:"12", t:"60s"}, {name: "Tríceps Extensão no Solo", s:"4", r:"10", t:"60s"}] },
-                    "Ter": { title: "Pernas Gasto Elevado", exercises: [{name: "Agachamento com Salto (Jump)", s:"4", r:"15", t:"60s"}, {name: "Agachamento Búlgaro (Cadeira)", s:"3", r:"12 cada perna", t:"60s"}, {name: "Panturrilha Unilateral", s:"4", r:"15 cada", t:"45s"}] },
-                    "Qua": { title: "Costas Explosão Livre", exercises: [{name: "Barra Fixa ou Remada Mochila", s:"4", r:"10", t:"60s"}, {name: "Supermans Isométrico", s:"4", r:"30 segundos", t:"45s"}, {name: "Rosca Isométrica com Toalha", s:"4", r:"45s esforço", t:"45s"}] },
-                    "Qui": { title: "Ombros Calistenia Avançada", exercises: [{name: "Flexão Pike", s:"4", r:"10", t:"60s"}, {name: "Elevação Lateral Unilateral", s:"4", r:"12", t:"45s"}, {name: "Prancha com Toque no Ombro", s:"4", r:"20 toques", t:"30s"}] },
-                    "Sex": { title: "Abdômen Core e HIIT Intenso", exercises: [{name: "Abdominal Canivete", s:"4", r:"15", t:"45s"}, {name: "Burpees Completos", s:"4", r:"12", t:"45s"}, {name: "Escalador Abs (Mountain Climber)", s:"4", r:"45 segundos", t:"30s"}] },
-                    "Sáb": { title: "Cardio HIIT", exercises: [{name: "Polichinelos + Agachamentos", s:"5", r:"1 min cada", t:"30s"}] },
-                    "Dom": { title: "Descanso Total", exercises: [{name: "Descanso", s:"0", r:"0", t:"0"}] }
+                "Casa": {
+                    "Iniciante": {
+                        "Seg": { id: "f_ca_in_seg", title: "Pernas Corporal Básico", exercises: [{name:"Agachamento Livre", s:"3", r:"15"}, {name:"Elevação Pélvica Solo", s:"3", r:"20"}, {name:"Afundo Estático", s:"3", r:"12"}, {name:"Abdução de Coxa Deitada", s:"3", r:"15"}] },
+                        "Ter": { id: "f_ca_in_ter", title: "Tônus Superior Corporal", exercises: [{name:"Flexão de Braço Joelhos", s:"3", r:"10"}, {name:"Tríceps Cadeira Banco", s:"3", r:"12"}, {name:"Flexão Parede Aberta", s:"3", r:"15"}, {name:"Prancha Isométrica Solo", s:"3", r:"30s"}] },
+                        "Qua": { id: "f_ca_in_qua", title: "Queima Aeróbica / HIIT", exercises: [{name:"Polichinelos Ritmo", s:"3", r:"40s"}, {name:"Mountain Climber Solo", s:"3", r:"30s"}, {name:"Corrida Parada Joelho", s:"3", r:"45s"}, {name:"Abdominal Supra Crunches", s:"3", r:"15"}] },
+                        "Qui": { id: "f_ca_in_qui", title: "Glúteos Isolados Solo", exercises: [{name:"Quatro Apoios Coice Solo", s:"3", r:"15"}, {name:"Quatro Apoios Lateral Cão", s:"3", r:"15"}, {name:"Elevação Pélvica Isometria", s:"3", r:"45s"}, {name:"Gêmeos em Pé Chão", s:"4", r:"20"}] },
+                        "Sex": { id: "f_ca_in_sex", title: "Abdomen & Linha Cintura", exercises: [{name:"Abdominal Remador", s:"3", r:"15"}, {name:"Abdominal Infra Solo", s:"3", r:"15"}, {name:"Prancha Lateral Solo", s:"2", r:"20s"}, {name:"Abdominal Borboleta", s:"3", r:"15"}] },
+                        "Sáb": { id: "f_ca_in_sab", title: "Alongamento & Cardio Ativo", exercises: [{name:"Agachamento Isométrico", s:"2", r:"30s"}, {name:"Polichinelos Finais", s:"3", r:"30s"}, {name:"Abdominal Supra", s:"3", r:"15"}, {name:"Corrida no Lugar Leve", s:"1", r:"5 min"}] }
+                    },
+                    "Intermediário": {
+                        "Seg": { id: "f_ca_int_seg", title: "Pernas & Glúteos Circuito", exercises: [{name:"Agachamento Búlgaro Sofá", s:"4", r:"12"}, {name:"Agachamento Sumô Pausa 3s", s:"4", r:"15"}, {name:"Passada Caminhada Quarto", s:"3", r:"20 passos"}, {name:"Elevação Pélvica Solo", s:"4", r:"20"}] },
+                        "Ter": { id: "f_ca_int_ter", title: "Definição Braços Corpo", exercises: [{name:"Tríceps Cadeira Banco", s:"4", r:"12"}, {name:"Flexão Braço Tradicional", s:"3", r:"10"}, {name:"Flexão Escorpião Joelho", s:"3", r:"12"}, {name:"Prancha Dinâmica Sobe", s:"4", r:"30s"}] },
+                        "Qua": { id: "f_ca_int_qua", title: "HIIT Queima Acelerada", exercises: [{name:"Mountain Climber Rápido", s:"4", r:"45s"}, {name:"Burpees Intermediários", s:"4", r:"10"}, {name:"Saltos Pliométricos Chão", s:"4", r:"12"}, {name:"Abdominal Canivete", s:"4", r:"15"}] },
+                        "Qui": { id: "f_ca_int_qui", title: "Glúteos Foco Isometria", exercises: [{name:"Elevação Pélvica Unilateral", s:"4", r:"12"}, {name:"Quatro Apoios Perna Estendida", s:"4", r:"15"}, {name:"Agachamento Isométrico Parede", s:"4", r:"45s"}, {name:"Gêmeos Unilateral Chão", s:"4", r:"15"}] },
+                        "Sex": { id: "f_ca_int_sex", title: "Abdomen Core Total Inter", exercises: [{name:"Abdominal Remador", s:"4", r:"20"}, {name:"Bicicleta Abdominal", s4:"", r:"30"}, {name:"Prancha Solo Isométrica", s:"4", r:"1 min"}, {name:"Abdominal Canivete V-Up", s:"4", r:"15"}] },
+                        "Sáb": { id: "f_ca_int_sab", title: "FullBody Tonificação Geral", exercises: [{name:"Agachamento Sumô Peso", s:"4", r:"15"}, {name:"Afundo Reverso", s:"4", r:"12"}, {name:"Flexão Pike Ombros", s:"3", r:"10"}, {name:"Burpees Finais Rápidos", s:"3", r:"8"}] }
+                    },
+                    "Avançado": {
+                        "Seg": { id: "f_ca_av_seg", title: "Inferiores Pressão Glúteos", exercises: [{name:"Agachamento Salto Pliométrico", s:"4", r:"15"}, {name:"Agachamento Búlgaro Carga Casa", s:"4", r:"12"}, {name:"Elevação Pélvica Unilateral", s:"4", r:"15"}, {name:"Agachamento Sumô Pulso Baixo", s:"4", r:"20"}] },
+                        "Ter": { id: "f_ca_av_ter", title: "Flexões Desafio Calistenia", exercises: [{name:"Flexão Completa Solo", s:"4", r:"12"}, {name:"Flexão Declinada Pés Sofá", s:"4", r:"12"}, {name:"Tríceps Extensão Chão", s:"4", r:"12"}, {name:"Prancha Dinâmica Alta", s:"4", r:"45s"}] },
+                        "Qua": { id: "f_ca_av_qua", title: "Queima Máxima de Gordura", exercises: [{name:"Burpees Avançados Completos", s:"5", r:"15"}, {name:"Saltos Verticais Explosão", s:"4", r:"15"}, {name:"Mountain Climber Sprints", s:"4", r:"1 min"}, {name:"Abdominal V-Up Canivete", s:"4", r:"20"}] },
+                        "Qui": { id: "f_ca_av_qui", title: "Isolamento Pélvico Avançado", exercises: [{name:"Elevação Pélvica Carga Extra", s:"4", r:"20"}, {name:"Quatro Apoios Coice Carga", s:"4", r:"15"}, {name:"Abdução de Quadril Prancha", s:"4", r:"15"}, {name:"Gêmeos Unilateral Explosivo", s:"4", r:"20"}] },
+                        "Sex": { id: "f_ca_av_sex", title: "Abdominais Nível Atleta Abs", exercises: [{name:"Abdominal Canivete V-Up Carga", s:"4", r:"20"}, {name:"Prancha Isométrica 1 Pé", s:"4", r:"45s"}, {name:"Bicicleta Abs Intensa", s:"4", r:"50"}, {name:"Abdominal Remador", s:"4", r:"25"}] },
+                        "Sáb": { id: "f_ca_av_sab", title: "Desafio Isometria Inferiores", exercises: [{name:"Agachamento Búlgaro Isometria", s:"4", r:"12"}, {name:"Agachamento Isométrico Parede", s:"4", r:"1min"}, {name:"Burpees Finais Exaustão", s:"4", r:"12"}, {name:"Polichinelos Explosivos", s:"4", r:"45s"}] }
+                    }
                 }
             }
         };
 
+        // Estado persistente dos treinos concluídos pelo ID interno
+        let CompletedWorkoutsRegistry = {}; 
+        let AppStats = { trainedDaysCount: 0 };
+        let currentActiveWorkoutID = "";
+
+        // Lista de Avatares no estilo Gibi/HQ (FontAwesome Character Badges)
+        const AVATAR_COMIC_BOOK_DATABASE = [
+            { name: "Gibi Masculino (Ninja)", iconClass: "fa-solid fa-user-ninja", key: "ninja" },
+            { name: "Gibi Feminino (Heroína)", iconClass: "fa-solid fa-user-astronaut", key: "astro" }
+        ];
+        let selectedAvatarIcon = "fa-solid fa-user-ninja";
+
         window.onload = function() {
-            setTimeout(() => { navigateTo('screen-welcome'); }, 3000);
+            buildCalendarStrip();
+            buildAvatarSelectionGrid();
+            setTimeout(() => { navigateTo('screen-welcome'); }, 1500);
         };
 
-        // SINAL SONORO (BIP DO ALARME)
-        function playBipSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-                
-                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
-
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.4);
-            } catch (e) {
-                console.log("Áudio bloqueado pelo navegador.");
-            }
-        }
-
-        // NAVEGAÇÃO DE TELAS
         function navigateTo(screenId) {
             const screens = document.querySelectorAll('.screen');
             screens.forEach(s => s.classList.remove('active'));
-
-            const targetScreen = document.getElementById(screenId);
-            if (targetScreen) targetScreen.classList.add('active');
-
-            const bottomNav = document.getElementById('global-bottom-nav');
-            if (screenId === 'screen-splash' || screenId === 'screen-welcome' || screenId === 'screen-register' || screenId === 'screen-loading-ia') {
-                bottomNav.classList.add('hidden-nav');
-            } else {
-                bottomNav.classList.remove('hidden-nav');
-            }
-
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            if (screenId === 'screen-home') document.getElementById('nav-home').classList.add('active');
-            if (screenId === 'screen-my-workout' || screenId === 'screen-workout-active') document.getElementById('nav-workout').classList.add('active');
-            if (screenId === 'screen-evolution') document.getElementById('nav-evo').classList.add('active');
-            
-            if (screenId === 'screen-customize') {
-                document.getElementById('cust-name-input').value = userProfile.name;
-            }
-
-            if (screenId === 'screen-schedule') {
-                checkWorkoutLockStatus();
-            }
+            document.getElementById(screenId).classList.add('active');
+            if (screenId === 'screen-schedule') checkWorkoutLockStatus();
         }
 
-        function selectChip(element, groupId) {
-            const container = document.getElementById(groupId);
-            container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+        function clearAndSelectChip(element, groupId) {
+            document.getElementById(groupId).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
             element.classList.add('selected');
         }
 
-        function toggleMultiChip(element) {
-            element.classList.toggle('selected');
-        }
-
-        // AVATAR
-        let selectedAvatarTemp = "💪";
-        function selectAvatar(element, avatarEmoji) {
-            const container = element.parentElement;
-            container.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedAvatarTemp = avatarEmoji;
-        }
-
-        function saveProfileCustomization() {
-            const newName = document.getElementById('cust-name-input').value.trim();
-            if(!newName) {
-                alert("O nome não pode ficar em branco!");
-                return;
-            }
-            userProfile.name = newName;
-            userProfile.avatar = selectedAvatarTemp;
-
-            document.getElementById('home-username').innerText = userProfile.name;
-            document.getElementById('home-avatar-display').innerText = userProfile.avatar;
-
-            triggerPushNotification("Perfil atualizado! ✨");
-            navigateTo('screen-home');
-        }
-
-        // CADASTRO
-        function processAI() {
-            const nameInput = document.getElementById('reg-name').value.trim();
-            const ageInput = document.getElementById('reg-age').value.trim();
-            const heightInput = document.getElementById('reg-height').value.trim();
-            const weightInput = document.getElementById('reg-weight').value.trim();
-
-            if (!nameInput || !ageInput || !heightInput || !weightInput) {
-                alert("Preencha todos os campos obrigatórios (*).");
-                return;
-            }
-
-            userProfile.name = nameInput;
-            userProfile.age = parseInt(ageInput);
-            userProfile.height = parseInt(heightInput);
-            userProfile.weight = parseInt(weightInput);
-            userProfile.duration = document.getElementById('reg-duration').value;
+        function triggerWorkoutGeneration() {
+            const loader = document.getElementById('generation-loader');
+            const resultsWrapper = document.getElementById('workout-results-wrapper');
             
-            userProfile.goal = document.querySelector('#group-goal .chip.selected').innerText;
-            userProfile.level = document.querySelector('#group-level .chip.selected').innerText;
-            userProfile.location = document.querySelector('#group-location .chip.selected').innerText;
+            resultsWrapper.style.display = "none";
+            loader.style.display = "block";
 
-            navigateTo('screen-loading-ia');
-            
             setTimeout(() => {
-                document.getElementById('ia-status-title').innerText = "Montando seus treinos...";
-                document.getElementById('ia-status-desc').innerText = "Sincronizando rotinas com o calendário atual.";
+                loader.style.display = "none";
+                buildDynamicWeeklyWorkoutList();
+                resultsWrapper.style.display = "block";
+                triggerPushNotification("Treinos com mais volume gerados com sucesso! 🔥");
             }, 1200);
-
-            setTimeout(() => {
-                document.getElementById('home-username').innerText = userProfile.name;
-                document.getElementById('home-weight').innerText = userProfile.weight + " kg";
-                document.getElementById('home-goal').innerText = userProfile.goal;
-                document.getElementById('home-days-count').innerText = `0 dias`;
-                document.getElementById('home-avatar-display').innerText = userProfile.avatar;
-
-                buildWorkoutList();
-                buildCalendarStrip();
-
-                navigateTo('screen-home');
-                triggerPushNotification("Plano inteligente configurado e sincronizado! 🚀");
-            }, 2800);
         }
 
-        function buildWorkoutList() {
+        function buildDynamicWeeklyWorkoutList() {
+            const gender = document.getElementById('filter-gender').querySelector('.chip.selected').innerText;
+            const level = document.getElementById('filter-level').querySelector('.chip.selected').innerText;
+            const location = document.getElementById('filter-location').querySelector('.chip.selected').innerText;
+
             const container = document.getElementById('workout-days-list');
             container.innerHTML = "";
 
-            const mapDiasCompletos = {
-                "Seg": "Segunda-feira", "Ter": "Terça-feira", "Qua": "Quarta-feira",
-                "Qui": "Quinta-feira", "Sex": "Sexta-feira", "Sáb": "Sábado", "Dom": "Domingo"
-            };
+            const categoriaFiltro = COMPREHENSIVE_TRAINING_MATRIX[gender][location][level];
+            const diasOrdemCompleta = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-            const diasSemanaOrdem = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
-            const local = userProfile.location;
-            const nivel = userProfile.level;
+            diasOrdemCompleta.forEach(dia => {
+                const dados = categoriaFiltro[dia];
+                if(dados) {
+                    let previewBadgesHTML = "";
+                    dados.exercises.slice(0, 2).forEach(ex => {
+                        previewBadgesHTML += `<span class="exercise-preview-badge">${ex.name.split(" ")[0]}...</span>`;
+                    });
 
-            diasSemanaOrdem.forEach(dia => {
-                const dadosDia = AIDatabase[local][nivel][dia];
-                
-                let isDiaDisponivel = false;
-                document.querySelectorAll('#group-days .chip.selected').forEach(c => {
-                    if(c.innerText === dia) isDiaDisponivel = true;
-                });
+                    // Verifica se o ID deste treino já está marcado como feito
+                    const isDone = CompletedWorkoutsRegistry[dados.id] === true;
 
-                if (dadosDia) {
                     const item = document.createElement('div');
-                    item.className = "workout-list-item";
-                    if(!isDiaDisponivel) item.style.opacity = "0.4";
-
+                    item.className = `workout-list-item ${isDone ? 'done' : ''}`;
                     item.innerHTML = `
                         <div>
-                            <span style="font-size:11px; color:var(--primary); font-weight:700;">${mapDiasCompletos[dia].toUpperCase()}</span>
-                            <h4 style="font-size:15px; margin-top:2px;">${dadosDia.title}</h4>
-                            <span style="font-size:12px; color:var(--text-muted);">${dadosDia.exercises.length} Exercícios • ${userProfile.duration}</span>
+                            <span style="font-size:10px; color:var(--primary); font-weight:800; text-transform:uppercase;">${dia}feira</span>
+                            <h4 style="font-size:13px; margin-top:1px;">${dados.title}</h4>
+                            <div style="margin-top:1px;">${previewBadgesHTML} <span style="font-size:11px; color:var(--primary); font-weight:600;">(${dados.exercises.length} Ex.)</span></div>
                         </div>
-                        <i class="fa-solid fa-chevron-right" style="color:var(--text-muted); font-size:14px;"></i>
+                        <i class="${isDone ? 'fa-solid fa-circle-check status-icon' : 'fa-solid fa-circle-play status-icon'}" style="color:var(--primary); font-size:18px;"></i>
                     `;
-
-                    if(isDiaDisponivel) {
-                        item.onclick = () => openActiveWorkoutScreen(dia, dadosDia);
-                    }
+                    item.onclick = () => openExerciseExecutionSequence(dados);
                     container.appendChild(item);
                 }
             });
         }
 
-        // CONSTROI O CALENDÁRIO BASEADO NA DATA E DIA ATUAIS DA SEMANA REAL
-        function buildCalendarStrip() {
-            const container = document.getElementById('calendar-strip-container');
-            container.innerHTML = "";
-            
-            const diasLetras = ["D", "S", "T", "Q", "Q", "S", "S"];
-            const hoje = new Date();
-            const diaSemanaAtual = hoje.getDay(); // 0 = Domingo, 1 = Segunda, etc.
+        let activeExercisesQueue = [];
+        let activeExercisePointer = 0;
 
-            // Encontra a segunda-feira da semana atual
-            const segundaFeira = new Date(hoje);
-            const distanciaParaSegunda = hoje.getDay() === 0 ? -6 : 1 - hoje.getDay();
-            segundaFeira.setDate(hoje.getDate() + distanciaParaSegunda);
-
-            // Renderiza os 7 dias da semana corrente (de Segunda a Domingo)
-            for (let i = 0; i < 7; i++) {
-                const diaLoop = new Date(segundaFeira);
-                diaLoop.setDate(segundaFeira.getDate() + i);
-
-                const letraDia = diasLetras[diaLoop.getDay()];
-                const numeroDia = diaLoop.getDate();
-
-                const dayDiv = document.createElement('div');
-                dayDiv.className = "calendar-day";
-                
-                // Identifica se o dia renderizado coincide com o dia atual do calendário real
-                if (diaLoop.toDateString() === hoje.toDateString()) {
-                    dayDiv.classList.add('today');
-                }
-
-                dayDiv.innerHTML = `
-                    <span style="color:var(--text-muted); display:block; font-size:10px; font-weight:600;">${letraDia}</span>
-                    <b style="font-size:15px;">${numeroDia}</b>
-                `;
-                container.appendChild(dayDiv);
-            }
-        }
-
-        // TEMPORIZADOR DE EXERCÍCIOS
-        let currentExercisesArray = [];
-        let currentExerciseIndex = 0;
-        let timerInterval = null;
-        let timerSeconds = 0;
-        let isTimerRunning = false;
-
-        function openActiveWorkoutScreen(diaSigla, dadosDia) {
-            currentExercisesArray = dadosDia.exercises;
-            currentExerciseIndex = 0;
+        function openExerciseExecutionSequence(dadosDia) {
+            currentActiveWorkoutID = dadosDia.id; // Salva para marcação posterior
+            activeExercisesQueue = dadosDia.exercises;
+            activeExercisePointer = 0;
             document.getElementById('active-day-title').innerText = dadosDia.title;
-            
-            loadExerciseData();
+            renderCurrentExerciseFromQueue();
             navigateTo('screen-workout-active');
-            resetTimer();
         }
 
-        function loadExerciseData() {
-            if (currentExerciseIndex >= currentExercisesArray.length) {
+        function renderCurrentExerciseFromQueue() {
+            if(activeExercisePointer >= activeExercisesQueue.length) {
+                // MARCA COMO FEITO AO FINALIZAR TODOS OS EXERCÍCIOS DO DIA
+                CompletedWorkoutsRegistry[currentActiveWorkoutID] = true;
+                buildDynamicWeeklyWorkoutList(); // Recarrega a home com a marcação verde
+                
+                triggerPushNotification("Treino concluído e marcado como feito! 🏆");
                 navigateTo('screen-schedule');
                 return;
             }
 
-            const current = currentExercisesArray[currentExerciseIndex];
+            const current = activeExercisesQueue[activeExercisePointer];
             document.getElementById('active-exercise-name').innerText = current.name;
             document.getElementById('active-series').innerText = current.s;
             document.getElementById('active-reps').innerText = current.r;
-            document.getElementById('active-rest').innerText = current.t;
-            
-            const icons = ["fa-dumbbell", "fa-person-running", "fa-heart-pulse"];
-            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-            document.getElementById('active-exercise-icon').innerHTML = `<i class="fa-solid ${randomIcon}"></i>`;
-        }
 
-        function toggleTimer() {
-            const btn = document.getElementById('btn-timer-control');
-            if (isTimerRunning) {
-                clearInterval(timerInterval);
-                btn.innerText = "Retomar Descanso";
-                isTimerRunning = false;
-            } else {
-                isTimerRunning = true;
-                btn.innerText = "Pausar Tempo";
-                timerInterval = setInterval(() => {
-                    timerSeconds++;
-                    
-                    if (timerSeconds > 0 && timerSeconds % 45 === 0) {
-                        playBipSound();
-                    }
+            const queueContainer = document.getElementById('upcoming-exercises-queue');
+            queueContainer.innerHTML = "";
+            activeExercisesQueue.slice(activeExercisePointer + 1).forEach((ex, idx) => {
+                const row = document.createElement('div');
+                row.style = "background: rgba(255,255,255,0.02); padding: 7px; border-radius: 6px; margin-bottom: 4px; font-size:12px; display:flex; justify-content:space-between;";
+                row.innerHTML = `<span>${idx + 1}. ${ex.name}</span> <span style="color:var(--primary);">${ex.s}x${ex.r}</span>`;
+                queueContainer.appendChild(row);
+            });
 
-                    let m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
-                    let s = (timerSeconds % 60).toString().padStart(2, '0');
-                    document.getElementById('timer-clock').innerText = `${m}:${s}`;
-                }, 1000);
+            if(activeExercisesQueue.slice(activeExercisePointer + 1).length === 0) {
+                queueContainer.innerHTML = `<span style="color:var(--text-muted); font-size:11px;">Último movimento da listagem atual!</span>`;
             }
-        }
-
-        function resetTimer() {
-            clearInterval(timerInterval);
-            timerSeconds = 0;
-            isTimerRunning = false;
-            document.getElementById('timer-clock').innerText = "00:00";
-            document.getElementById('btn-timer-control').innerText = "Iniciar Descanso";
-        }
-
-        function finishExercise() {
-            playBipSound();
             resetTimer();
-            currentExerciseIndex++;
-            if(currentExerciseIndex < currentExercisesArray.length) {
-                loadExerciseData();
-            } else {
-                triggerPushNotification("Série finalizada com sucesso!");
-                navigateTo('screen-schedule');
+        }
+
+        function finishCurrentExercise() {
+            activeExercisePointer++;
+            renderCurrentExerciseFromQueue();
+        }
+
+        function buildCalendarStrip() {
+            const container = document.getElementById('calendar-strip-container');
+            container.innerHTML = "";
+            const letras = ["D", "S", "T", "Q", "Q", "S", "S"];
+            const hoje = new Date();
+            const segunda = new Date(hoje);
+            const dist = hoje.getDay() === 0 ? -6 : 1 - hoje.getDay();
+            segunda.setDate(hoje.getDate() + dist);
+
+            for(let i=0; i<7; i++) {
+                const diaLoop = new Date(segunda);
+                diaLoop.setDate(segunda.getDate() + i);
+                const div = document.createElement('div');
+                div.className = `calendar-day ${diaLoop.toDateString() === hoje.toDateString() ? 'today' : ''}`;
+                div.innerHTML = `<span style="color:var(--text-muted); display:block; font-size:10px;">${letras[diaLoop.getDay()]}</span><b>${diaLoop.getDate()}</b>`;
+                container.appendChild(div);
             }
         }
 
-        // TRAVA ANTIFRAUDE DE 24 HORAS & REGISTRO DE CALORIAS
         function checkWorkoutLockStatus() {
-            const btnSubmit = document.getElementById('btn-submit-workout');
-            const lockMsg = document.getElementById('lock-timer-msg');
+            const btn = document.getElementById('btn-submit-workout');
+            const msg = document.getElementById('lock-timer-msg');
             const lastWorkout = localStorage.getItem('lastWorkoutTimestamp');
+            if(restrictionTimerInterval) clearInterval(restrictionTimerInterval);
 
-            if (restrictionTimerInterval) clearInterval(restrictionTimerInterval);
-
-            if (lastWorkout) {
-                const now = new Date().getTime();
-                const timePassed = now - parseInt(lastWorkout);
-                const twentyFourHours = 24 * 60 * 60 * 1000; // 24 horas em milissegundos
-
-                if (timePassed < twentyFourHours) {
-                    btnSubmit.disabled = true;
-                    lockMsg.style.display = "block";
-
+            if(lastWorkout) {
+                const tempoPassado = new Date().getTime() - parseInt(lastWorkout);
+                const limite24h = 24 * 60 * 60 * 1000;
+                if(tempoPassado < limite24h) {
+                    btn.disabled = true;
+                    msg.style.display = "block";
                     restrictionTimerInterval = setInterval(() => {
-                        const currentNow = new Date().getTime();
-                        const remainingTime = twentyFourHours - (currentNow - parseInt(lastWorkout));
-
-                        if (remainingTime <= 0) {
+                        const restante = limite24h - (new Date().getTime() - parseInt(lastWorkout));
+                        if(restante <= 0) {
                             clearInterval(restrictionTimerInterval);
-                            btnSubmit.disabled = false;
-                            lockMsg.style.display = "none";
+                            btn.disabled = false;
+                            msg.style.display = "none";
                         } else {
-                            let hours = Math.floor(remainingTime / (1000 * 60 * 60)).toString().padStart(2, '0');
-                            let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                            let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000).toString().padStart(2, '0');
-                            lockMsg.innerText = `🔒 Registro bloqueado. Próximo treino liberado em: ${hours}:${minutes}:${seconds}`;
+                            let h = Math.floor(restante / (1000*60*60)).toString().padStart(2, '0');
+                            let m = Math.floor((restante % (1000*60*60)) / (1000*60)).toString().padStart(2, '0');
+                            let s = Math.floor((restante % (1000*60)) / 1000).toString().padStart(2, '0');
+                            msg.innerText = `🔒 Próximo registro liberado em: ${h}:${m}:${s}`;
                         }
                     }, 1000);
                     return;
                 }
             }
-            btnSubmit.disabled = false;
-            lockMsg.style.display = "none";
+            btn.disabled = false;
+            msg.style.display = "none";
         }
 
         function registerTodayWorkout() {
-            const btnSubmit = document.getElementById('btn-submit-workout');
-            if (btnSubmit.disabled) return;
-
-            const minutes = parseInt(document.getElementById('schedule-duration-input').value);
-            const intensity = document.getElementById('schedule-intensity-input').value;
-            
-            let metFactor = 4.0;
-            if(intensity === "Moderada") metFactor = 6.0;
-            if(intensity === "Alta") metFactor = 8.5;
-
-            let calculatedCalories = Math.round((metFactor * 3.5 * userProfile.weight / 200) * minutes);
-
+            if(document.getElementById('btn-submit-workout').disabled) return;
             AppStats.trainedDaysCount++;
-            AppStats.caloriesBurned += calculatedCalories;
-            AppStats.totalMinutes += minutes;
-
-            document.getElementById('home-days-count').innerText = `${AppStats.trainedDaysCount} dias`;
-            document.getElementById('home-calories').innerText = `${AppStats.caloriesBurned} kcal`;
             
-            // Marca visualmente o dia de hoje no calendário como completo
-            const todayIndicator = document.querySelector('.calendar-day.today');
-            if (todayIndicator) todayIndicator.classList.add('completed');
+            const today = document.querySelector('.calendar-day.today');
+            if(today) today.className = "calendar-day completed";
 
-            const resultBox = document.getElementById('calorie-result-box');
-            document.getElementById('calorie-result-text').innerText = `Você queimou aproximadamente ${calculatedCalories} calorias!`;
-            resultBox.style.display = "block";
+            document.getElementById('calorie-result-text').innerText = "Frequência e histórico computados com sucesso!";
+            document.getElementById('calorie-result-box').style.display = "block";
 
-            document.getElementById('chart-current-bar').style.height = `${Math.min(AppStats.trainedDaysCount * 25, 100)}%`;
-
-            // GRAVA O TIMESTAMP DA TRAVA DE SEGURANÇA
             localStorage.setItem('lastWorkoutTimestamp', new Date().getTime().toString());
-
-            checkGamificationUnlocks(calculatedCalories);
             checkWorkoutLockStatus();
 
             setTimeout(() => {
                 navigateTo('screen-home');
-                resultBox.style.display = "none";
-            }, 2500);
+                document.getElementById('calorie-result-box').style.display = "none";
+            }, 1800);
         }
 
-        function checkGamificationUnlocks(lastSessionCalories) {
-            if (AppStats.trainedDaysCount >= 1) {
-                const b1 = document.getElementById('badge-1');
-                if(!b1.classList.contains('unlocked')) {
-                    b1.classList.add('unlocked');
-                    document.getElementById('status-badge-1').innerText = "Concluído";
-                    triggerPushNotification("Conquista: Primeiro Passo! 🏅");
-                }
-            }
-            if (lastSessionCalories > 400 || AppStats.caloriesBurned >= 500) {
-                const b2 = document.getElementById('badge-2');
-                if(!b2.classList.contains('unlocked')) {
-                    b2.classList.add('unlocked');
-                    document.getElementById('status-badge-2').innerText = "Concluído";
-                    triggerPushNotification("Conquista: Foco Total! 🔥");
-                }
-            }
-            if (AppStats.trainedDaysCount >= 3) {
-                const b3 = document.getElementById('badge-3');
-                if(!b3.classList.contains('unlocked')) {
-                    b3.classList.add('unlocked');
-                    document.getElementById('status-badge-3').innerText = "Concluído";
-                    triggerPushNotification("Conquista: Consistência! 👑");
-                }
-            }
+        // SELEÇÃO DOS PERSONAGENS EM ESTILO GIBI/HQ
+        function buildAvatarSelectionGrid() {
+            const container = document.getElementById('avatar-ia-options-container');
+            container.innerHTML = "";
+            
+            AVATAR_COMIC_BOOK_DATABASE.forEach((av, i) => {
+                const opt = document.createElement('div');
+                opt.className = `avatar-option ${i === 0 ? 'selected' : ''}`;
+                opt.innerHTML = `<i class="${av.iconClass}"></i><span style="font-size:12px; font-weight:600; display:block;">${av.name}</span>`;
+                opt.onclick = () => {
+                    container.querySelectorAll('.avatar-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    selectedAvatarIcon = av.iconClass;
+                };
+                container.appendChild(opt);
+            });
+        }
+
+        function saveProfileCustomization() {
+            document.getElementById('home-avatar-icon').className = selectedAvatarIcon;
+            navigateTo('screen-home');
+            triggerPushNotification("Personagem alterado com sucesso! ⚡");
         }
 
         function triggerPushNotification(text) {
             const toast = document.getElementById('push-notification');
             document.getElementById('push-text').innerText = text;
             toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 4000);
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        let timerSec = 0, timerInt = null;
+        function toggleTimer() {
+            const btn = document.getElementById('btn-timer-control');
+            if(timerInt) {
+                clearInterval(timerInt); timerInt = null; btn.innerText = "Retomar";
+            } else {
+                btn.innerText = "Pausar";
+                timerInt = setInterval(() => {
+                    timerSec++;
+                    let m = Math.floor(timerSec/60).toString().padStart(2,'0');
+                    let s = (timerSec%60).toString().padStart(2,'0');
+                    document.getElementById('timer-clock').innerText = `${m}:${s}`;
+                }, 1000);
+            }
+        }
+        function resetTimer() {
+            clearInterval(timerInt); timerInt = null; timerSec = 0;
+            document.getElementById('timer-clock').innerText = "00:00";
+            document.getElementById('btn-timer-control').innerText = "Iniciar Intervalo";
         }
     </script>
 </body>
