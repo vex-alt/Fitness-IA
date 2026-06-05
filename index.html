@@ -17,6 +17,9 @@
             --text-muted: #aaaaaa;
             --accent: #ff4500;
             --success: #25d366;
+            --gold: #FFD700;
+            --water: #1E90FF;
+            --xp-color: #9932CC;
         }
 
         * {
@@ -119,6 +122,28 @@
             text-align: center;
         }
 
+        /* Status Gamer Widget */
+        .gamer-status-bar {
+            background: linear-gradient(135deg, #23192a, #140d1a);
+            border: 1px solid var(--xp-color);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .xp-progress-container {
+            background: #2c2c2e;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .xp-progress-bar {
+            background: var(--xp-color);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
         .filter-section {
             background: var(--card-bg);
             padding: 10px 12px;
@@ -179,7 +204,23 @@
         .submenu-row-item i.icon-lead { color: var(--primary); font-size: 18px; width: 20px; text-align: center; }
 
         .exercise-image-placeholder { width: 100%; height: 160px; background: linear-gradient(45deg, #1c1c1e, #2c2c2e); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; font-size: 44px; color: var(--primary); }
-        .timer-display { font-size: 42px; font-weight: 700; text-align: center; margin: 10px 0; font-family: monospace; color: var(--primary); }
+        .timer-display { font-size: 42px; font-weight: 700; text-align: center; margin: 5px 0; font-family: monospace; color: var(--primary); }
+
+        .water-alert-box {
+            background: rgba(30, 144, 255, 0.15);
+            border: 1px solid var(--water);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: pulseWater 2s infinite alternate;
+        }
+        @keyframes pulseWater {
+            from { box-shadow: 0 0 4px rgba(30, 144, 255, 0.2); }
+            to { box-shadow: 0 0 12px rgba(30, 144, 255, 0.5); }
+        }
 
         .calendar-strip { display: flex; justify-content: space-between; margin-bottom: 20px; }
         .calendar-day { background-color: var(--card-bg); padding: 10px 6px; border-radius: 8px; text-align: center; width: 13%; font-size: 12px; }
@@ -192,6 +233,17 @@
         .avatar-option.selected { border-color: var(--primary); background-color: rgba(0, 191, 255, 0.05); }
         .avatar-option.selected i { color: var(--primary); }
 
+        .achievements-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
+        .achievement-card { background: var(--card-bg); border: 1px solid #222; padding: 15px; border-radius: 12px; text-align: center; opacity: 0.4; transition: all 0.3s ease; }
+        .achievement-card i { font-size: 32px; color: #555; margin-bottom: 8px; transition: all 0.3s ease; }
+        .achievement-card h4 { font-size: 12px; font-weight: 600; margin-bottom: 2px; color: var(--text-muted); }
+        .achievement-card p { font-size: 10px; color: #666; }
+        
+        .achievement-card.unlocked { opacity: 1; border-color: var(--gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.1); }
+        .achievement-card.unlocked i { color: var(--gold); transform: scale(1.1); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+        .achievement-card.unlocked h4 { color: #fff; }
+        .achievement-card.unlocked p { color: var(--text-muted); }
+
         .social-buttons-container { display: flex; justify-content: center; gap: 30px; margin: 25px 0; }
         .social-round-btn { width: 60px; height: 60px; border-radius: 50%; background-color: var(--card-bg); border: 1px solid #333; display: flex; justify-content: center; align-items: center; font-size: 26px; text-decoration: none; }
         .social-round-btn.instagram { color: #e1306c; }
@@ -199,6 +251,8 @@
 
         .notification-toast { position: absolute; top: -100px; left: 16px; right: 16px; background-color: #1c1c1e; border-left: 4px solid var(--primary); padding: 12px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; transition: 0.5s ease-in-out; display: flex; align-items: center; gap: 10px; }
         .notification-toast.show { top: 20px; }
+        .notification-toast.water-toast { border-left-color: var(--water); }
+        .notification-toast.level-toast { border-left-color: var(--xp-color); }
         
         .workout-list-item { background-color: var(--card-bg); padding: 12px 14px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid #222; }
         .workout-list-item.done { border-color: var(--success); background: linear-gradient(to right, #1c1c1e, rgba(37, 211, 102, 0.05)); }
@@ -217,9 +271,9 @@
     <div class="phone-container">
         
         <div id="push-notification" class="notification-toast">
-            <i class="fa-solid fa-bell" style="color: var(--primary);"></i>
+            <i id="notification-icon" class="fa-solid fa-bell" style="color: var(--primary);"></i>
             <div>
-                <b style="font-size: 13px; display:block;">Fitness AI Pro</b>
+                <b id="notification-title" style="font-size: 13px; display:block;">Fitness AI Pro</b>
                 <span id="push-text" style="font-size: 12px; color: var(--text-muted);">Processando...</span>
             </div>
         </div>
@@ -235,19 +289,29 @@
         <div id="screen-welcome" class="screen">
             <div style="margin-top: auto; margin-bottom: 60px;">
                 <h1 style="font-size: 32px; font-weight:700; line-height: 1.2;">Rotina de<br><span style="color:var(--primary)">Alta Performance</span></h1>
-                <p style="color: #e0e0e0; margin-top: 10px; margin-bottom: 30px; font-size: 15px;">Monte rotinas de treino robustas e dinâmicas com no mínimo 4 exercícios por grupamento.</p>
-                <button class="btn-primary" onclick="navigateTo('screen-home')">Entrar no App</button>
+                <p style="color: #e0e0e0; margin-top: 10px; margin-bottom: 30px; font-size: 15px;">Transforme seus treinos em missões, suba de nível e queime calorias com precisão matemática.</p>
+                <button class="btn-primary" onclick="navigateTo('screen-home')">Entrar no Jogo</button>
             </div>
         </div>
 
         <div id="screen-home" class="screen">
             <div class="app-header">
                 <div>
-                    <span style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Painel Inteligente</span>
-                    <h2 style="font-size: 19px; font-weight: 700;">Monte sua Ficha</h2>
+                    <span style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Painel Gamer</span>
+                    <h2 style="font-size: 19px; font-weight: 700;">Seu Personagem</h2>
                 </div>
                 <div class="header-avatar-clickable" onclick="navigateTo('screen-customize')">
                     <i id="home-avatar-icon" class="fa-solid fa-user-ninja"></i>
+                </div>
+            </div>
+
+            <div class="gamer-status-bar">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; font-weight: bold; color: #fff;"><i class="fa-solid fa-shuttle-space" style="color: var(--xp-color);"></i> NÍVEL <span id="hud-level-number">1</span></span>
+                    <span style="font-size: 11px; color: var(--text-muted);" id="hud-xp-text">0 / 100 XP</span>
+                </div>
+                <div class="xp-progress-container">
+                    <div class="xp-progress-bar" id="hud-xp-bar"></div>
                 </div>
             </div>
 
@@ -291,7 +355,7 @@
 
             <div class="loading-inline-box" id="generation-loader">
                 <i class="fa-solid fa-circle-notch"></i>
-                <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">Processando rotinas completas de alta queima...</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">Processando rotinas gamificadas...</p>
             </div>
 
             <div id="workout-results-wrapper" style="display: none;">
@@ -301,6 +365,13 @@
 
             <h3 style="font-size: 13px; color: var(--text-muted); margin-top: 15px;">Ferramentas e Informações:</h3>
             <div class="submenu-list">
+                <div class="submenu-row-item" onclick="navigateTo('screen-achievements')">
+                    <div>
+                        <i class="fa-solid fa-trophy icon-lead" style="color: var(--gold);"></i>
+                        <span>Conquistas e Medalhas</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#555;"></i>
+                </div>
                 <div class="submenu-row-item" onclick="navigateTo('screen-schedule')">
                     <div>
                         <i class="fa-solid fa-calendar-check icon-lead"></i>
@@ -320,38 +391,58 @@
 
         <div id="screen-workout-active" class="screen">
             <div class="screen-nav-header">
-                <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
+                <div class="btn-back" onclick="exitActiveWorkout()"><i class="fa-solid fa-arrow-left"></i></div>
                 <h3 id="active-day-title" style="color: var(--primary); font-size: 15px;">Treino Ativo</h3>
             </div>
 
-            <div style="background: #1c1c1e; padding: 12px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: linear-gradient(135deg, #1f1111, #140a0a); border: 1px solid #ff4500; border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 10px; color: var(--accent); font-weight: 700; text-transform: uppercase;"><i class="fa-solid fa-heart-pulse"></i> Monitor de Saúde</span>
+                    <div style="font-size: 16px; font-weight: bold; margin-top: 2px;"><span id="live-calories-counter">0</span> <span style="font-size: 12px; color: var(--text-muted);">kcal gastas</span></div>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 9px; color: var(--text-muted); display: block;">INTENSIDADE</span>
+                    <span id="live-intensity-badge" style="background: var(--accent); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold;">MÉDIA</span>
+                </div>
+            </div>
+
+            <div id="water-alert" class="water-alert-box" style="display: none;">
+                <i class="fa-solid fa-droplet" style="color: var(--water); font-size: 20px;"></i>
+                <div style="flex: 1;">
+                    <span style="font-size: 11px; color: var(--water); font-weight: bold; display: block;">HORA DE HIDRATAR!</span>
+                    <p style="font-size: 12px; color: #fff;">Beba 200ml de água para manter a performance.</p>
+                </div>
+                <button onclick="confirmWaterDrink()" style="background: var(--water); color: #fff; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">Ok</button>
+            </div>
+
+            <div style="background: #1c1c1e; padding: 12px; border-radius: 10px; margin-bottom: 10px;">
                 <span style="font-size: 11px; color: var(--primary); font-weight: bold;">MOVIMENTO ATUAL:</span>
                 <h2 id="active-exercise-name" style="font-size: 19px; margin-top: 2px;">Nome do Exercício</h2>
             </div>
 
-            <div class="exercise-image-placeholder">
+            <div class="exercise-image-placeholder" style="height: 130px; margin-bottom: 10px;">
                 <i class="fa-solid fa-dumbbell"></i>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
-                <div style="background: var(--card-bg); padding: 10px; border-radius: 8px; text-align: center;">
-                    <span style="font-size:11px; color:var(--text-muted);">SÉRIES</span><br><b id="active-series" style="font-size: 18px;">--</b>
+                <div style="background: var(--card-bg); padding: 8px; border-radius: 8px; text-align: center;">
+                    <span style="font-size:11px; color:var(--text-muted);">SÉRIES</span><br><b id="active-series" style="font-size: 16px;">--</b>
                 </div>
-                <div style="background: var(--card-bg); padding: 10px; border-radius: 8px; text-align: center;">
-                    <span style="font-size:11px; color:var(--text-muted);">REPETIÇÕES</span><br><b id="active-reps" style="font-size: 18px;">--</b>
+                <div style="background: var(--card-bg); padding: 8px; border-radius: 8px; text-align: center;">
+                    <span style="font-size:11px; color:var(--text-muted);">REPETIÇÕES</span><br><b id="active-reps" style="font-size: 16px;">--</b>
                 </div>
             </div>
 
             <div class="timer-display" id="timer-clock">00:00</div>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 15px;">
-                <button class="btn-secondary" id="btn-timer-control" onclick="toggleTimer()">Iniciar Intervalo</button>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 12px;">
+                <button class="btn-secondary" id="btn-timer-control" onclick="toggleTimer()">Iniciar Tempo</button>
                 <button class="btn-primary" onclick="finishCurrentExercise()">Avançar Movimento</button>
             </div>
 
             <div style="border-top: 1px solid #333; padding-top: 10px;">
-                <span style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 8px;">Lista Sequencial de Próximos:</span>
-                <div id="upcoming-exercises-queue" style="max-height: 140px; overflow-y: auto;"></div>
+                <span style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 6px;">Lista Sequencial de Próximos:</span>
+                <div id="upcoming-exercises-queue" style="max-height: 110px; overflow-y: auto;"></div>
             </div>
         </div>
 
@@ -364,10 +455,10 @@
             <div class="calendar-strip" id="calendar-strip-container"></div>
 
             <div style="margin-bottom: 16px; background: var(--card-bg); padding: 12px; border-radius: 10px;">
-                <label style="color: var(--primary); font-size:11px; font-weight:700;">INTENSIDADE DETECTADA</label>
-                <select id="schedule-intensity-input" style="width:100%; padding:10px; background:#2c2c2e; border:none; border-radius:6px; color:#fff; margin-top:5px;">
-                    <option value="Moderada" selected>Volume Moderado</option>
-                    <option value="Alta">Alta Intensidade (Até a Falha)</option>
+                <label style="color: var(--primary); font-size:11px; font-weight:700;">INTENSIDADE DO TREINO PARA CÁLCULO</label>
+                <select id="schedule-intensity-input" style="width:100%; padding:10px; background:#2c2c2e; border:none; border-radius:6px; color:#fff; margin-top:5px;" onchange="updateLiveIntensityBadge()">
+                    <option value="Moderada" selected>Volume Moderado (Gasto Padrão)</option>
+                    <option value="Alta">Alta Intensidade (Taxa de Queima Elevada)</option>
                 </select>
             </div>
 
@@ -378,6 +469,17 @@
                 <i class="fa-solid fa-circle-check" style="color: var(--success); font-size: 24px;"></i>
                 <p id="calorie-result-text" style="font-size: 14px; font-weight:600; margin-top:5px;"></p>
             </div>
+        </div>
+
+        <div id="screen-achievements" class="screen">
+            <div class="screen-nav-header">
+                <div class="btn-back" onclick="navigateTo('screen-home')"><i class="fa-solid fa-arrow-left"></i></div>
+                <h2 style="font-size: 20px;">Suas Conquistas</h2>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 15px;">Cumpra metas para desbloquear troféus e ganhar bônus ocultos de XP.</p>
+            
+            <div class="achievements-grid" id="achievements-list-container">
+                </div>
         </div>
 
         <div id="screen-credits" class="screen">
@@ -414,7 +516,7 @@
     </div>
 
     <script>
-        // MATRIZ DE TREINOS EXPANDIDA (MÍNIMO 4 EXERCÍCIOS CONECTADOS POR GRUPO PARA MÁXIMO RESULTADO)
+        // MATRIZ DE TREINOS
         const COMPREHENSIVE_TRAINING_MATRIX = {
             "Masculino": {
                 "Academia": {
@@ -465,7 +567,7 @@
                         "Ter": { id: "m_ca_av_ter", title: "Inferiores Quebra Fibra", exercises: [{name:"Pistol Squat (1 Perna)", s:"4", r:"8"}, {name:"Agachamento com Salto", s:"4", r:"15"}, {name:"Afundo Saltando Alternado", s:"4", r:"20"}, {name:"Agachamento Isométrico Carga", s:"4", r:"1 min"}] },
                         "Qua": { id: "m_ca_av_qua", title: "Circuito HIIT Destruidor", exercises: [{name:"Burpees Completos", s:"5", r:"15"}, {name:"Saltos Verticais Caixa", s:"4", r:"15"}, {name:"Corrida Joelho Alto", s:"4", r:"45s"}, {name:"Abdominal Canivete Peso", s:"4", r:"20"}] },
                         "Qui": { id: "m_ca_av_qui", title: "Superior Calistenia Elite", exercises: [{name:"Flexão Pike Pés Elevados", s:"4", r:"12"}, {name:"Tríceps Extensão Chão", s:"4", r:"12"}, {name:"Flexão Arqueiro", s:"4", r:"10"}, {name:"Prancha Isométrica 1 Mão", s:"4", r:"30s"}] },
-                        "Sex": { id: "m_ca_av_sex", title: "Glúteos & Isquios Extremo", exercises: [{name:"Agachamento Búlgaro Isometria", s:"4", r:"10"}, {name:"Elevação Pélvica Unilateral Carga", s:"4", r:"20"}, {name:"Stiff Unilateral Carga Extra", s:"4", r:"15"}, {name:"Gêmeos Unilateral", s:"4", r:"20"}] },
+                        "Sex": { id: "f_ca_av_sex", title: "Glúteos & Isquios Extremo", exercises: [{name:"Agachamento Búlgaro Isometria", s:"4", r:"10"}, {name:"Elevação Pélvica Unilateral Carga", s:"4", r:"20"}, {name:"Stiff Unilateral Carga Extra", s:"4", r:"15"}, {name:"Gêmeos Unilateral", s:"4", r:"20"}] },
                         "Sáb": { id: "m_ca_av_sab", title: "Core & Gasto Elite", exercises: [{name:"Abdominal V-Up Canivete", s:"4", r:"20"}, {name:"Prancha Isométrica", s:"4", r:"1min"}, {name:"Bicicleta Abs Velocidade", s:"4", r:"40"}, {name:"Burpees Finais Exaustão", s:"4", r:"15"}] }
                     }
                 }
@@ -511,7 +613,7 @@
                         "Ter": { id: "f_ca_int_ter", title: "Definição Braços Corpo", exercises: [{name:"Tríceps Cadeira Banco", s:"4", r:"12"}, {name:"Flexão Braço Tradicional", s:"3", r:"10"}, {name:"Flexão Escorpião Joelho", s:"3", r:"12"}, {name:"Prancha Dinâmica Sobe", s:"4", r:"30s"}] },
                         "Qua": { id: "f_ca_int_qua", title: "HIIT Queima Acelerada", exercises: [{name:"Mountain Climber Rápido", s:"4", r:"45s"}, {name:"Burpees Intermediários", s:"4", r:"10"}, {name:"Saltos Pliométricos Chão", s:"4", r:"12"}, {name:"Abdominal Canivete", s:"4", r:"15"}] },
                         "Qui": { id: "f_ca_int_qui", title: "Glúteos Foco Isometria", exercises: [{name:"Elevação Pélvica Unilateral", s:"4", r:"12"}, {name:"Quatro Apoios Perna Estendida", s:"4", r:"15"}, {name:"Agachamento Isométrico Parede", s:"4", r:"45s"}, {name:"Gêmeos Unilateral Chão", s:"4", r:"15"}] },
-                        "Sex": { id: "f_ca_int_sex", title: "Abdomen Core Total Inter", exercises: [{name:"Abdominal Remador", s:"4", r:"20"}, {name:"Bicicleta Abdominal", s4:"", r:"30"}, {name:"Prancha Solo Isométrica", s:"4", r:"1 min"}, {name:"Abdominal Canivete V-Up", s:"4", r:"15"}] },
+                        "Sex": { id: "f_ca_int_sex", title: "Abdomen Core Total Inter", exercises: [{name:"Abdominal Remador", s:"4", r:"20"}, {name:"Bicicleta Abdominal", s:"4", r:"30"}, {name:"Prancha Solo Isométrica", s:"4", r:"1 min"}, {name:"Abdominal Canivete V-Up", s:"4", r:"15"}] },
                         "Sáb": { id: "f_ca_int_sab", title: "FullBody Tonificação Geral", exercises: [{name:"Agachamento Sumô Peso", s:"4", r:"15"}, {name:"Afundo Reverso", s:"4", r:"12"}, {name:"Flexão Pike Ombros", s:"3", r:"10"}, {name:"Burpees Finais Rápidos", s:"3", r:"8"}] }
                     },
                     "Avançado": {
@@ -526,12 +628,41 @@
             }
         };
 
-        // Estado persistente dos treinos concluídos pelo ID interno
-        let CompletedWorkoutsRegistry = {}; 
-        let AppStats = { trainedDaysCount: 0 };
-        let currentActiveWorkoutID = "";
+        // --- BANCO DE DADOS LOCAL (LOCALSTORAGE) ---
+        // Carrega os dados salvos anteriormente ou inicia um jogo novo se for a primeira vez
+        let CompletedWorkoutsRegistry = JSON.parse(localStorage.getItem('gym_rpg_completed')) || {}; 
 
-        // Lista de Avatares no estilo Gibi/HQ (FontAwesome Character Badges)
+        let AppStats = JSON.parse(localStorage.getItem('gym_rpg_stats')) || { 
+            trainedDaysCount: 0, 
+            avatarChanged: false, 
+            weeklyGenerated: false,
+            currentXP: 0,
+            currentLevel: 1,
+            unlockedAchievements: []
+        };
+
+        // Função unificada para salvar os dados no "Banco de Dados" do navegador
+        function saveGameData() {
+            localStorage.setItem('gym_rpg_completed', JSON.stringify(CompletedWorkoutsRegistry));
+            localStorage.setItem('gym_rpg_stats', JSON.stringify(AppStats));
+            localStorage.setItem('gym_rpg_avatar', selectedAvatarIcon);
+        }
+        // -------------------------------------------
+        
+        let currentActiveWorkoutID = "";
+        let restrictionTimerInterval = null;
+        let totalWorkoutCaloriesBurned = 0;
+
+        // Tabela Gamer de Conquistas
+        const ACHIEVEMENTS_DATABASE = [
+            { key: "first_step", title: "Primeiro Passo", desc: "Abriu as configurações básicas.", icon: "fa-solid fa-flag-checkered", check: () => true },
+            { key: "generator", title: "Mestre dos Treinos", desc: "Gerou uma rotina com IA.", icon: "fa-solid fa-wand-magic-sparkles", check: () => AppStats.weeklyGenerated },
+            { key: "cosmetic", title: "Visual Novo", desc: "Equipou um avatar de Gibi.", icon: "fa-solid fa-mask", check: () => AppStats.avatarChanged },
+            { key: "level_5", title: "Guerreiro em Ascensão", desc: "Alcance o Nível 2 no aplicativo.", icon: "fa-solid fa-bolt", check: () => AppStats.currentLevel >= 2 },
+            { key: "first_workout", title: "Primeiro Suor", desc: "Completou 1 treino completo.", icon: "fa-solid fa-fire", check: () => AppStats.trainedDaysCount >= 1 }
+        ];
+
+        // Lista de Avatares Style HQ
         const AVATAR_COMIC_BOOK_DATABASE = [
             { name: "Gibi Masculino (Ninja)", iconClass: "fa-solid fa-user-ninja", key: "ninja" },
             { name: "Gibi Feminino (Heroína)", iconClass: "fa-solid fa-user-astronaut", key: "astro" }
@@ -539,21 +670,89 @@
         let selectedAvatarIcon = "fa-solid fa-user-ninja";
 
         window.onload = function() {
+            // Recupera o avatar salvo no banco local, se existir
+            if (localStorage.getItem('gym_rpg_avatar')) {
+                selectedAvatarIcon = localStorage.getItem('gym_rpg_avatar');
+                document.getElementById('home-avatar-icon').className = selectedAvatarIcon;
+            }
+
             buildCalendarStrip();
             buildAvatarSelectionGrid();
+            renderAchievementsGrid();
+            updateGamerHUD();
+
+            // Se o usuário já gerou treinos antes, mostra a lista automaticamente ao abrir
+            if (AppStats.weeklyGenerated) {
+                buildDynamicWeeklyWorkoutList();
+                document.getElementById('workout-results-wrapper').style.display = "block";
+            }
+
             setTimeout(() => { navigateTo('screen-welcome'); }, 1500);
         };
 
         function navigateTo(screenId) {
             const screens = document.querySelectorAll('.screen');
             screens.forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
+            document.getElementById(screenId).add?.[0] || document.getElementById(screenId).classList.add('active');
             if (screenId === 'screen-schedule') checkWorkoutLockStatus();
+            if (screenId === 'screen-achievements') renderAchievementsGrid();
+            if (screenId === 'screen-home') updateGamerHUD();
         }
 
         function clearAndSelectChip(element, groupId) {
             document.getElementById(groupId).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
             element.classList.add('selected');
+        }
+
+        // MOTOR GAMER: Sistema de Experiência (XP) e Níveis
+        function addPlayerXP(amount) {
+            AppStats.currentXP += amount;
+            let xpNeeded = AppStats.currentLevel * 100;
+            
+            while (AppStats.currentXP >= xpNeeded) {
+                AppStats.currentXP -= xpNeeded;
+                AppStats.currentLevel++;
+                xpNeeded = AppStats.currentLevel * 100;
+                triggerLevelUpEvent();
+            }
+            updateGamerHUD();
+            checkAndUnlockAchievements();
+            saveGameData(); // <--- SALVA O PROGRESSO DE XP E LEVEL NO BANCO LOCAL
+        }
+
+        function triggerLevelUpEvent() {
+            setTimeout(() => {
+                const toast = document.getElementById('push-notification');
+                const icon = document.getElementById('notification-icon');
+                const title = document.getElementById('notification-title');
+                
+                toast.classList.add('level-toast');
+                icon.className = "fa-solid fa-star-and-crescent";
+                icon.style.color = "var(--xp-color)";
+                title.innerText = "LEVEL UP! 🌟";
+                
+                document.getElementById('push-text').innerText = `Parabéns! Você subiu para o Nível ${AppStats.currentLevel}!`;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 5000);
+            }, 800);
+        }
+
+        function updateGamerHUD() {
+            const xpNeeded = AppStats.currentLevel * 100;
+            const percentage = (AppStats.currentXP / xpNeeded) * 100;
+            
+            document.getElementById('hud-level-number').innerText = AppStats.currentLevel;
+            document.getElementById('hud-xp-text').innerText = `${AppStats.currentXP} / ${xpNeeded} XP`;
+            document.getElementById('hud-xp-bar').style.width = `${percentage}%`;
+        }
+
+        function checkAndUnlockAchievements() {
+            ACHIEVEMENTS_DATABASE.forEach(ach => {
+                if (ach.check() && !AppStats.unlockedAchievements.includes(ach.key)) {
+                    AppStats.unlockedAchievements.push(ach.key);
+                    triggerPushNotification(`Conquista Desbloqueada: ${ach.title} 🏆`);
+                }
+            });
         }
 
         function triggerWorkoutGeneration() {
@@ -565,9 +764,11 @@
 
             setTimeout(() => {
                 loader.style.display = "none";
+                AppStats.weeklyGenerated = true;
                 buildDynamicWeeklyWorkoutList();
                 resultsWrapper.style.display = "block";
-                triggerPushNotification("Treinos com mais volume gerados com sucesso! 🔥");
+                addPlayerXP(40); // XP por usar o gerador inteligente
+                triggerPushNotification("Fichas de alta queima sincronizadas! +40 XP");
             }, 1200);
         }
 
@@ -590,14 +791,13 @@
                         previewBadgesHTML += `<span class="exercise-preview-badge">${ex.name.split(" ")[0]}...</span>`;
                     });
 
-                    // Verifica se o ID deste treino já está marcado como feito
                     const isDone = CompletedWorkoutsRegistry[dados.id] === true;
 
                     const item = document.createElement('div');
                     item.className = `workout-list-item ${isDone ? 'done' : ''}`;
                     item.innerHTML = `
                         <div>
-                            <span style="font-size:10px; color:var(--primary); font-weight:800; text-transform:uppercase;">${dia}feira</span>
+                            <span style="font-size:10px; color:var(--primary); font-weight:800; text-transform:uppercase;">${dia}feira (+50 XP)</span>
                             <h4 style="font-size:13px; margin-top:1px;">${dados.title}</h4>
                             <div style="margin-top:1px;">${previewBadgesHTML} <span style="font-size:11px; color:var(--primary); font-weight:600;">(${dados.exercises.length} Ex.)</span></div>
                         </div>
@@ -613,21 +813,31 @@
         let activeExercisePointer = 0;
 
         function openExerciseExecutionSequence(dadosDia) {
-            currentActiveWorkoutID = dadosDia.id; // Salva para marcação posterior
+            currentActiveWorkoutID = dadosDia.id;
             activeExercisesQueue = dadosDia.exercises;
             activeExercisePointer = 0;
+            totalWorkoutCaloriesBurned = 0;
+            document.getElementById('live-calories-counter').innerText = "0";
             document.getElementById('active-day-title').innerText = dadosDia.title;
+            updateLiveIntensityBadge();
             renderCurrentExerciseFromQueue();
             navigateTo('screen-workout-active');
         }
 
         function renderCurrentExerciseFromQueue() {
             if(activeExercisePointer >= activeExercisesQueue.length) {
-                // MARCA COMO FEITO AO FINALIZAR TODOS OS EXERCÍCIOS DO DIA
                 CompletedWorkoutsRegistry[currentActiveWorkoutID] = true;
-                buildDynamicWeeklyWorkoutList(); // Recarrega a home com a marcação verde
+                AppStats.trainedDaysCount++;
+                buildDynamicWeeklyWorkoutList();
                 
-                triggerPushNotification("Treino concluído e marcado como feito! 🏆");
+                // Conclusão de Treino dá +50 XP
+                addPlayerXP(50);
+                triggerPushNotification("Missão cumprida! Ganhou +50 XP 🎯");
+                
+                // Transfere calorias totais para a tela do calendário
+                localStorage.setItem('lastCaloriesBurned', Math.round(totalWorkoutCaloriesBurned));
+                
+                exitActiveWorkout();
                 navigateTo('screen-schedule');
                 return;
             }
@@ -641,7 +851,7 @@
             queueContainer.innerHTML = "";
             activeExercisesQueue.slice(activeExercisePointer + 1).forEach((ex, idx) => {
                 const row = document.createElement('div');
-                row.style = "background: rgba(255,255,255,0.02); padding: 7px; border-radius: 6px; margin-bottom: 4px; font-size:12px; display:flex; justify-content:space-between;";
+                row.style = "background: rgba(255,255,255,0.02); padding: 5px; border-radius: 6px; margin-bottom: 4px; font-size:11px; display:flex; justify-content:space-between;";
                 row.innerHTML = `<span>${idx + 1}. ${ex.name}</span> <span style="color:var(--primary);">${ex.s}x${ex.r}</span>`;
                 queueContainer.appendChild(row);
             });
@@ -655,6 +865,13 @@
         function finishCurrentExercise() {
             activeExercisePointer++;
             renderCurrentExerciseFromQueue();
+        }
+
+        function exitActiveWorkout() {
+            clearInterval(timerInt);
+            timerInt = null;
+            document.getElementById('water-alert').style.display = "none";
+            navigateTo('screen-home');
         }
 
         function buildCalendarStrip() {
@@ -676,6 +893,23 @@
             }
         }
 
+        function renderAchievementsGrid() {
+            const container = document.getElementById('achievements-list-container');
+            container.innerHTML = "";
+
+            ACHIEVEMENTS_DATABASE.forEach(ach => {
+                const unlocked = AppStats.unlockedAchievements.includes(ach.key) || ach.check();
+                const card = document.createElement('div');
+                card.className = `achievement-card ${unlocked ? 'unlocked' : ''}`;
+                card.innerHTML = `
+                    <i class="${ach.icon}"></i>
+                    <h4>${ach.title}</h4>
+                    <p>${ach.desc}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         function checkWorkoutLockStatus() {
             const btn = document.getElementById('btn-submit-workout');
             const msg = document.getElementById('lock-timer-msg');
@@ -693,12 +927,12 @@
                         if(restante <= 0) {
                             clearInterval(restrictionTimerInterval);
                             btn.disabled = false;
-                            msg.style.display = "none";
+                            msg.style.none;
                         } else {
                             let h = Math.floor(restante / (1000*60*60)).toString().padStart(2, '0');
                             let m = Math.floor((restante % (1000*60*60)) / (1000*60)).toString().padStart(2, '0');
                             let s = Math.floor((restante % (1000*60)) / 1000).toString().padStart(2, '0');
-                            msg.innerText = `🔒 Próximo registro liberado em: ${h}:${m}:${s}`;
+                            msg.innerText = `🔒 Registro travado. Aguarde: ${h}:${m}:${s}`;
                         }
                     }, 1000);
                     return;
@@ -710,31 +944,33 @@
 
         function registerTodayWorkout() {
             if(document.getElementById('btn-submit-workout').disabled) return;
-            AppStats.trainedDaysCount++;
             
             const today = document.querySelector('.calendar-day.today');
             if(today) today.className = "calendar-day completed";
 
-            document.getElementById('calorie-result-text').innerText = "Frequência e histórico computados com sucesso!";
+            const cals = localStorage.getItem('lastCaloriesBurned') || "120";
+            document.getElementById('calorie-result-text').innerHTML = `Treino Salvo! <br><b style="color:var(--accent); font-size:16px;">🔥 ${cals} kcal</b> eliminadas do sistema!`;
             document.getElementById('calorie-result-box').style.display = "block";
 
             localStorage.setItem('lastWorkoutTimestamp', new Date().getTime().toString());
+            addPlayerXP(30); 
             checkWorkoutLockStatus();
+            saveGameData(); // <--- SALVA O CALENDÁRIO ATUALIZADO NO BANCO LOCAL
 
             setTimeout(() => {
                 navigateTo('screen-home');
                 document.getElementById('calorie-result-box').style.display = "none";
-            }, 1800);
+            }, 2500);
         }
 
-        // SELEÇÃO DOS PERSONAGENS EM ESTILO GIBI/HQ
         function buildAvatarSelectionGrid() {
             const container = document.getElementById('avatar-ia-options-container');
             container.innerHTML = "";
             
             AVATAR_COMIC_BOOK_DATABASE.forEach((av, i) => {
+                const isSelected = av.iconClass === selectedAvatarIcon;
                 const opt = document.createElement('div');
-                opt.className = `avatar-option ${i === 0 ? 'selected' : ''}`;
+                opt.className = `avatar-option ${isSelected ? 'selected' : ''}`;
                 opt.innerHTML = `<i class="${av.iconClass}"></i><span style="font-size:12px; font-weight:600; display:block;">${av.name}</span>`;
                 opt.onclick = () => {
                     container.querySelectorAll('.avatar-option').forEach(o => o.classList.remove('selected'));
@@ -747,36 +983,88 @@
 
         function saveProfileCustomization() {
             document.getElementById('home-avatar-icon').className = selectedAvatarIcon;
+            AppStats.avatarChanged = true;
+            addPlayerXP(25); 
             navigateTo('screen-home');
-            triggerPushNotification("Personagem alterado com sucesso! ⚡");
+            triggerPushNotification("Herói updated! +25 XP ⚡");
+            saveGameData(); // <--- SALVA O NOVO AVATAR ESCOLHIDO NO BANCO LOCAL
         }
 
-        function triggerPushNotification(text) {
+        function triggerPushNotification(text, type = "default") {
             const toast = document.getElementById('push-notification');
+            const icon = document.getElementById('notification-icon');
+            const title = document.getElementById('notification-title');
+            
+            if(type === "water") {
+                toast.classList.add('water-toast');
+                icon.className = "fa-solid fa-droplet";
+                icon.style.color = "var(--water)";
+                title.innerText = "Lembrete de Água";
+            } else {
+                toast.classList.remove('water-toast');
+                toast.classList.remove('level-toast');
+                icon.className = "fa-solid fa-bell";
+                icon.style.color = "var(--primary)";
+                title.innerText = "Fitness AI Pro";
+            }
+
             document.getElementById('push-text').innerText = text;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
+        // MONITOR DE SAÚDE: Cronômetro e Gasto Calórico por Intensidade
         let timerSec = 0, timerInt = null;
+        
         function toggleTimer() {
             const btn = document.getElementById('btn-timer-control');
             if(timerInt) {
                 clearInterval(timerInt); timerInt = null; btn.innerText = "Retomar";
             } else {
                 btn.innerText = "Pausar";
+                const intensidadeSelecionada = document.getElementById('schedule-intensity-input').value;
+                
+                const fatorCalorias = intensidadeSelecionada === "Alta" ? 0.22 : 0.13;
+
                 timerInt = setInterval(() => {
                     timerSec++;
                     let m = Math.floor(timerSec/60).toString().padStart(2,'0');
                     let s = (timerSec%60).toString().padStart(2,'0');
                     document.getElementById('timer-clock').innerText = `${m}:${s}`;
+                    
+                    totalWorkoutCaloriesBurned += fatorCalorias;
+                    document.getElementById('live-calories-counter').innerText = Math.floor(totalWorkoutCaloriesBurned);
+                    
+                    if (timerSec > 0 && timerSec % 45 === 0) {
+                        triggerWaterAlert();
+                    }
                 }, 1000);
             }
         }
+        
         function resetTimer() {
             clearInterval(timerInt); timerInt = null; timerSec = 0;
             document.getElementById('timer-clock').innerText = "00:00";
-            document.getElementById('btn-timer-control').innerText = "Iniciar Intervalo";
+            document.getElementById('btn-timer-control').innerText = "Iniciar Tempo";
+            document.getElementById('water-alert').style.display = "none";
+        }
+
+        function updateLiveIntensityBadge() {
+            const val = document.getElementById('schedule-intensity-input').value;
+            const badge = document.getElementById('live-intensity-badge');
+            badge.innerText = val === "Alta" ? "MÁXIMA" : "MÉDIA";
+            badge.style.background = val === "Alta" ? "var(--accent)" : "var(--primary)";
+        }
+
+        function triggerWaterAlert() {
+            document.getElementById('water-alert').style.display = "flex";
+            triggerPushNotification("Mantenha o fôlego! Beba água.", "water");
+        }
+
+        function confirmWaterDrink() {
+            document.getElementById('water-alert').style.display = "none";
+            addPlayerXP(10); 
+            triggerPushNotification("Hidratação confirmada! +10 XP 💧");
         }
     </script>
 </body>
